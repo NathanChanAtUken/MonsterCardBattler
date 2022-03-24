@@ -10,6 +10,17 @@ public class CardPhysics : MonoBehaviour {
     #endregion
 
     #region Initialization Methods
+    private void Awake() {
+        ImplicitInit();
+    }
+
+    private void ImplicitInit() {
+        LinearMovement movementParameters = new LinearMovement();
+        LayerMask defaultCollisionMask = LayerMask.GetMask();
+        movementModule.InitializeValues(movementParameters, defaultCollisionMask);
+        movementModule.colDetected += OnColDetected;
+    }
+
     private void Start() {
         
     }
@@ -19,8 +30,15 @@ public class CardPhysics : MonoBehaviour {
     private void Update() {
         
     }
+
+    private void FixedUpdate() {
+        movementModule.Move();
+    }
     #endregion
 
     #region Event Methods
+    public void OnColDetected(RaycastHit2D colInfo, MovementModule colDetector) {
+        Debug.Log("I hit something");
+    }
     #endregion
 }

@@ -12,59 +12,28 @@ public struct LinearMovement {
     }
 }
 
-public struct ArcMovement {
-    // Field Declarations
-    public float arcRadius, angularSpeed, arcAngle, angularAcceleration, radialSpeed, radialAcceleration;
-    public int arcDirection, radialDirection;
-
-    public const float ArcLinAngDiff = 90f;
-
-    // Constructors
-    public ArcMovement(float arcRad, float angSpd, int arcDir, float arcAng = 0f, float angAcc = 0f, float radSpd = 0f, float radAcc = 0f, int radDir = 0) {
-        arcRadius = arcRad;
-        angularSpeed = angSpd;
-        arcDirection = arcDir;
-        arcAngle = arcAng;
-        angularAcceleration = angAcc;
-        radialSpeed = radSpd;
-        radialAcceleration = radAcc;
-        radialDirection = radDir;
-    }
-
-    // Accessors
-    public float arcVelocity() {
-        return angularSpeed * arcDirection;
-    }
-
-    public float radialVelocity() {
-        return radialSpeed * radialDirection;
-    }
-}
-
 public class MovementModule : MonoBehaviour {
-    // Field Declarations
+    #region Fields
+        [Header("Editor Injected References")]
+        [SerializeField]
+        private Rigidbody2D body;
 
-    // References
-    [SerializeField]
-    public Rigidbody2D body;
+        [Header("Instantiation Injected Parameters")]
+        private LinearMovement movementParameters;
+        [SerializeField]
+        private int collisionSteps;
+        [SerializeField]
+        private LayerMask defaultMask;
 
-    // Input Fields
-    public LinearMovement linearMovement;
-    public ArcMovement arcMovement;
+        [Header("Debugging Viewables")]
+        [SerializeField]
+        private Vector2 totalVelocity;
 
-    // Exposed for Debugging
-    [SerializeField]
-    public Vector2 linearVelocity, arcVelocity, totalVelocity;
-    public LayerMask defaultMask;
-    [SerializeField]
-    public int stutterSteps = 10;
+        public delegate void OnColDetected(RaycastHit2D colInfo, MovementModule colDetector);
+        public event OnColDetected colDetected;
+    #endregion
 
-    // Event Fields
-    public delegate void OnColDetected(RaycastHit2D colInfo, MovementModule colDetector);
-    public event OnColDetected colDetected;
-
-    // Set Up Methods
-
+    #region Initialization Methods
     private void Awake() {
         
     }
@@ -72,27 +41,15 @@ public class MovementModule : MonoBehaviour {
     private void Start () {
 		
 	}
-	
-    public void InitializeValues(LinearMovement linMove, LayerMask mask) {
-        linearMovement = linMove;
-        arcMovement = new ArcMovement();
-        defaultMask = mask;
+
+    public void InitializeValues(LinearMovement thisMovementParameters, LayerMask thisDefaultMask, int thisCollisionSteps = 10) {
+        movementParameters = thisMovementParameters;
+        defaultMask = thisDefaultMask;
+        collisionSteps = thisCollisionSteps;
     }
+    #endregion
 
-    public void InitializeValues(ArcMovement arcMove, LayerMask mask) {
-        linearMovement = new LinearMovement();
-        arcMovement = arcMove;
-        defaultMask = mask;
-    }
-
-    public void InitializeValues(LinearMovement linMove, ArcMovement arcMove, LayerMask mask) {
-        linearMovement = linMove;
-        arcMovement = arcMove;
-        defaultMask = mask;
-    }
-
-    // Update Methods
-
+    #region Cycle Methods
     private void Update () {
 		
 	}
@@ -102,40 +59,27 @@ public class MovementModule : MonoBehaviour {
     }
 
     public void Move() {
-        // Calcuate Linear Movement
-        float linXVel = Mathf.Cos(linearMovement.movementAngle * Mathf.Deg2Rad) * linearMovement.movementSpeed * Time.deltaTime;
-        float linYVel = Mathf.Sin(linearMovement.movementAngle * Mathf.Deg2Rad) * linearMovement.movementSpeed * Time.deltaTime;
-        linearVelocity = new Vector2(linXVel, linYVel);
-
-        // Calculate Arc Velocity
-        arcMovement.arcAngle += arcMovement.arcVelocity() * Time.deltaTime;
-        arcMovement.arcRadius += arcMovement.radialVelocity() * Time.deltaTime;
-
-        float arcXVel = Mathf.Cos((arcMovement.arcAngle + ArcMovement.ArcLinAngDiff * arcMovement.arcDirection) * Mathf.Deg2Rad) * arcMovement.angularSpeed * Mathf.Deg2Rad * arcMovement.arcRadius * Time.deltaTime;
-        float arcYVel = Mathf.Sin((arcMovement.arcAngle + ArcMovement.ArcLinAngDiff * arcMovement.arcDirection) * Mathf.Deg2Rad) * arcMovement.angularSpeed * Mathf.Deg2Rad * arcMovement.arcRadius * Time.deltaTime;
-        arcVelocity = new Vector2(arcXVel, arcYVel);
-
-        // Forecast Collisions
-        totalVelocity = linearVelocity + arcVelocity;
-
-        ForecastCollisions(totalVelocity, defaultMask, stutterSteps);
-
-        // Acceleration
-        Acceleration();
+        CalculateVelocity();
+        ForecastCollisions();
+        ApplyAcceleration();
     }
 
-    private void Acceleration() {
-        linearMovement.movementSpeed += linearMovement.movementAcceleration * Time.deltaTime;
-        arcMovement.angularSpeed += arcMovement.angularAcceleration * Time.deltaTime;
-        arcMovement.radialSpeed += arcMovement.radialAcceleration * Time.deltaTime;
+    private void CalculateVelocity() {
+        float xVelocity = Mathf.Cos(movementParameters.movementAngle * Mathf.Deg2Rad) * movementParameters.movementSpeed * Time.deltaTime;
+        float yVelocity = Mathf.Sin(movementParameters.movementAngle * Mathf.Deg2Rad) * movementParameters.movementSpeed * Time.deltaTime;
+        totalVelocity = new Vector2(xVelocity, yVelocity);
     }
 
-    private void ForecastCollisions(Vector2 velocity, LayerMask mask, float numSteps) {
-        float travelDistance = velocity.magnitude;
-        Vector2 stepVelocity = velocity / numSteps;
+    private void ApplyAcceleration() {
+        movementParameters.movementSpeed += movementParameters.movementAcceleration * Time.deltaTime;
+    }
+
+    private void ForecastCollisions() {
+        float travelDistance = totalVelocity.magnitude;
+        Vector2 stepVelocity = totalVelocity / collisionSteps;
 
         while (travelDistance > 0) {
-            if (CheckCollision(stepVelocity, mask)) {
+            if (CheckCollision(stepVelocity, defaultMask)) {
                 break;
             }
             else {
@@ -164,17 +108,5 @@ public class MovementModule : MonoBehaviour {
             return false;
         }
     }
-
-    public void PlaneReflection(RaycastHit2D collision) {
-        // Obtain surface normal
-        Vector2 surfaceNorm = collision.normal;
-
-        // Apply reflection off of plane surface
-        Vector2 linReflection = Vector2.Reflect(linearVelocity, surfaceNorm);
-        linearMovement.movementAngle = Mathf.Atan2(linReflection.y, linReflection.x) * Mathf.Rad2Deg;
-
-        arcMovement.arcDirection = -arcMovement.arcDirection;
-        Vector2 arcReflection = Vector2.Reflect(arcVelocity, surfaceNorm);
-        arcMovement.arcAngle = Mathf.Atan2(arcReflection.y, arcReflection.x) * Mathf.Rad2Deg - ArcMovement.ArcLinAngDiff * arcMovement.arcDirection;
-    }
+    #endregion
 }
