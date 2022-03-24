@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardPhysics : MonoBehaviour {
+public class CardPhysics : MonoBehaviour, IClickable {
     #region Fields
         [Header("Injected Dependencies")]
         [SerializeField]
