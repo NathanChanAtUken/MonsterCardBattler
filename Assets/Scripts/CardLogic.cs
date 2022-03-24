@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,15 +38,17 @@ public class CardLogic {
         }
     #endregion
 
-    #region Initialization Methods
-    private void Start() {
-        
-    }
-    #endregion
+    #region Constructors
+    public CardLogic(bool instantiateRandomized = true, CardColor color = CardColor.Red, CardSuit suit = CardSuit.Diamond, int rank = 1) {
+        this.color = color;
+        this.suit = suit;
+        this.rank = rank;
 
-    #region Cycle Methods
-    private void Update() {
-        
+        if (instantiateRandomized) {
+            this.color = (CardColor)UnityEngine.Random.Range(0, Enum.GetNames(typeof(CardColor)).Length);
+            this.suit = (CardSuit)UnityEngine.Random.Range(0, Enum.GetNames(typeof(CardSuit)).Length);
+            this.rank = UnityEngine.Random.Range(1, 14); // Inclusive 1 = A, Exclusive 14 (13 = K)
+        }
     }
     #endregion
 

@@ -4,9 +4,9 @@ using UnityEngine;
 using System.Linq;
 
 [System.Serializable]
-public class CardStackLogic : MonoBehaviour {
+public class CardStackLogic {
     #region Fields
-        [Header("Inspector Injected Parameters")]
+        [Header("Injected Parameters")]
         [SerializeField]
         private int stackLimit;
         public int StackLimit {
@@ -16,22 +16,23 @@ public class CardStackLogic : MonoBehaviour {
 
         [Header("Debugging Viewables")]
         [SerializeField]
-        private List<CardLogic> cardStack = new List<CardLogic>();
+        private List<CardLogic> cardStack;
     #endregion
 
     #region Initialization Methods
-    private void Start() {
-        
+    public CardStackLogic(List<CardLogic> cardStack = null, int stackLimit = int.MaxValue) {
+        StackLimit = stackLimit;
+
+        if (cardStack == null) {
+            this.cardStack = new List<CardLogic>();
+        }
+        else {
+            this.cardStack = cardStack;
+        }
     }
     #endregion
 
-    #region Cycle Methods
-    private void Update() {
-        
-    }
-    #endregion
-
-    #region External Methods
+    #region Data Methods
     public void PlayCardAt(CardLogic playedCard, int index) {
         cardStack.Insert(index, playedCard);
     }
@@ -64,6 +65,10 @@ public class CardStackLogic : MonoBehaviour {
 
     public bool IsFull() {
         return cardStack.Count == stackLimit;
+    }
+
+    public bool ContainsCard(CardLogic card) {
+        return cardStack.Contains(card);
     }
     #endregion
 }
