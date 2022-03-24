@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83c077d6826544c748cdac7f68ffab66, type: 3}
+  m_Name: CardSprites
+  m_EditorClassIdentifier: 
+  spriteElements:
+  - spriteKey: Card_Back
+    sprite: {fileID: 21300000, guid: 8b955acc6af994a4791690411a113c0c, type: 3}
+  - spriteKey: Card_Front
+    sprite: {fileID: 21300000, guid: 005e3a5d343fefe4fac380fa40f8424b, type: 3}
+  - spriteKey: Suit_Club
+    sprite: {fileID: 21300000, guid: edffbf4c3935c654e97bd8d39ed7147c, type: 3}
+  - spriteKey: Suit_Diamonds
+    sprite: {fileID: 21300000, guid: e23d227c882d71f4392084c0584f8676, type: 3}
+  - spriteKey: Suit_Hearts
+    sprite: {fileID: 21300000, guid: 2a51a22496be2474d8c0aa052a45919b, type: 3}
+  - spriteKey: Suit_Spades
+    sprite: {fileID: 21300000, guid: 82418c750b880cb4c861db980f1081e7, type: 3}
+  - spriteKey: Black_A
+    sprite: {fileID: 21300000, guid: 1093805d0367780428b6caf8dea4dcb5, type: 3}
+  - spriteKey: Black_2
+    sprite: {fileID: 21300000, guid: 00d177674c7cc3741b0f0e06c3c82589, type: 3}
+  - spriteKey: Black_3
+    sprite: {fileID: 21300000, guid: 3bb25b017c63c874a9a100f425ebde76, type: 3}
+  - spriteKey: Black_4
+    sprite: {fileID: 21300000, guid: 9fa2066ac42ebed46aa2a1908539d8ff, type: 3}
+  - spriteKey: Black_5
+    sprite: {fileID: 21300000, guid: d2174ea316269574b9dd977303abc929, type: 3}
+  - spriteKey: Black_6
+    sprite: {fileID: 21300000, guid: 502fe0edd6494444f8b5b60d10dd19a6, type: 3}
+  - spriteKey: Black_7
+    sprite: {fileID: 21300000, guid: 9dc5dd7f13f2a5341b7f7ab2c308c212, type: 3}
+  - spriteKey: Black_8
+    sprite: {fileID: 21300000, guid: 81749f40d906c1b4cbb43e059e5b9e13, type: 3}
+  - spriteKey: Black_9
+    sprite: {fileID: 21300000, guid: 735c14166273331438799906de63c880, type: 3}
+  - spriteKey: Black_10
+    sprite: {fileID: 21300000, guid: 1171d59d7419fa841abddd55d1097e1a, type: 3}
+  - spriteKey: Black_J
+    sprite: {fileID: 21300000, guid: 81c0b1f5e5896914f86b9c16d667da06, type: 3}
+  - spriteKey: Black_Q
+    sprite: {fileID: 21300000, guid: c00ace115d5e6444ab32e9b36b2569e3, type: 3}
+  - spriteKey: Black_K
+    sprite: {fileID: 21300000, guid: b98b33bb63cb3664bbcbaf1a39c67ffe, type: 3}
+  - spriteKey: Red_A
+    sprite: {fileID: 21300000, guid: 93a7eb099f606cf40858df32c6d8facd, type: 3}
+  - spriteKey: Red_2
+    sprite: {fileID: 21300000, guid: e76f0d01b599e7247aa1efc7ae5bd6e6, type: 3}
+  - spriteKey: Red_3
+    sprite: {fileID: 21300000, guid: fbd0e29a03ffad64b8a60e207635b9cf, type: 3}
+  - spriteKey: Red_4
+    sprite: {fileID: 21300000, guid: ba07e368349c6a349bacf166abb99ffe, type: 3}
+  - spriteKey: Red_5
+    sprite: {fileID: 21300000, guid: 4f32d6dda79e7514c932906f86fd8fcd, type: 3}
+  - spriteKey: Red_6
+    sprite: {fileID: 21300000, guid: 58c09af161dcaef49bd053f396e883cb, type: 3}
+  - spriteKey: Red_7
+    sprite: {fileID: 21300000, guid: f61e01b06435f9a48a75801ecf9b17f3, type: 3}
+  - spriteKey: Red_8
+    sprite: {fileID: 21300000, guid: 5eea0efb66c24434381aa88ee31c2e56, type: 3}
+  - spriteKey: Red_9
+    sprite: {fileID: 21300000, guid: d532cae34e5d55e4f867102a22e65b8f, type: 3}
+  - spriteKey: Red_10
+    sprite: {fileID: 21300000, guid: ed50b5f60219f344ab20430f7ac6f6ee, type: 3}
+  - spriteKey: Red_J
+    sprite: {fileID: 21300000, guid: 05231c7a31ba81f4690249ea59378bd6, type: 3}
+  - spriteKey: Red_Q
+    sprite: {fileID: 21300000, guid: 7c9f852b06e651b48962aa4b2030e49e, type: 3}
+  - spriteKey: Red_K
+    sprite: {fileID: 21300000, guid: 6c0b16bbe8247e84ebe84a6d8d51816c, type: 3}
