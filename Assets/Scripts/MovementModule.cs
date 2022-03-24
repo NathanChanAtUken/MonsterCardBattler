@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public struct LinearMovement {
     public float movementSpeed, movementAngle, movementAcceleration;
 
@@ -19,6 +20,7 @@ public class MovementModule : MonoBehaviour {
         private Rigidbody2D body;
 
         [Header("Instantiation Injected Parameters")]
+        [SerializeField]
         private LinearMovement movementParameters;
         [SerializeField]
         private int collisionSteps;

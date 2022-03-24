@@ -8,6 +8,7 @@ public class CardLogic : MonoBehaviour {
             Black = 0,
             Red = 1
         }
+        [SerializeField]
         private CardColor color;
         public CardColor Color {
             get { return color; }
@@ -20,12 +21,14 @@ public class CardLogic : MonoBehaviour {
             Heart = 2,
             Spade = 3
         }
+        [SerializeField]
         private CardSuit suit;
         public CardSuit Suit {
             get { return suit; }
             set { suit = value; }
         }
 
+        [SerializeField]
         private int rank;
         public int Rank {
             get { return rank; }
