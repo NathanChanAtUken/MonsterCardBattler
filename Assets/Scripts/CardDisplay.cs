@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class CardDisplay : MonoBehaviour {
   [SerializeField] private SpriteDictionary cardSprites;
@@ -9,8 +10,16 @@ public class CardDisplay : MonoBehaviour {
   [SerializeField] private SpriteRenderer suitRenderer;
   [SerializeField] private SpriteRenderer numberMiddleRenderer;
   [SerializeField] private SpriteRenderer numberCenterRenderer;
+  [SerializeField] private SortingGroup sortingGroup;
 
-  public void Initialize(CardLogic cardLogic, bool showFront = true) {
+  public void Initialize(CardLogic cardLogic, bool showFront = true, int sortingOrder = 0) {
+    this.sortingGroup.sortingOrder = sortingOrder;
+
+    if (cardLogic == null) {
+      this.ShowBack();
+      return;
+    }
+
     this.suitRenderer.sprite = this.GetSuitSprite(cardLogic.Suit);
     this.numberMiddleRenderer.sprite = this.GetNumberSprite(cardLogic.Color, cardLogic.Rank);
     this.numberCenterRenderer.sprite = this.GetNumberSprite(cardLogic.Color, cardLogic.Rank);

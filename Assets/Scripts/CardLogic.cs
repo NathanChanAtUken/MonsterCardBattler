@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardLogic : MonoBehaviour {
+[System.Serializable]
+public class CardLogic {
     #region Fields
         public enum CardColor {
             Black = 0,

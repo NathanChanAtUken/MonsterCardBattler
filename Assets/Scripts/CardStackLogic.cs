@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+[System.Serializable]
 public class CardStackLogic : MonoBehaviour {
     #region Fields
         [Header("Inspector Injected Parameters")]
