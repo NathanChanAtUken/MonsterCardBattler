@@ -41,4 +41,10 @@ public class CardPhysics : MonoBehaviour {
         Debug.Log("I hit something");
     }
     #endregion
+
+    #region Cleanup Methods
+    private void OnDestroy() {
+        movementModule.colDetected -= OnColDetected;
+    }
+    #endregion
 }
