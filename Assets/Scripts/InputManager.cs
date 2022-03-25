@@ -30,7 +30,7 @@ public class InputManager : MonoBehaviour {
 
     private List<GameObject> CheckClicked() {
         List<GameObject> clickedObjects = new List<GameObject>();
-        RaycastHit2D[] collisionInfo = Physics2D.RaycastAll(Input.mousePosition, Input.mousePosition - Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        RaycastHit2D[] collisionInfo = Physics2D.RaycastAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
         foreach (RaycastHit2D collision in collisionInfo) {
             if (collision.collider.GetComponent<IClickable>() != null) {

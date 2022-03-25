@@ -7,14 +7,15 @@ public class Card : MonoBehaviour {
         [Header("Debugging Viewables")]
         [SerializeField]
         private CardLogic cardLogic;
-        [SerializeField]
-        private CardView cardView;
+        public CardLogic CardLogic {
+            get { return cardLogic; }
+            set { cardLogic = value; }
+        }
     #endregion
     
     #region Initialization Methods
-    public void InitializeValues(CardLogic cardLogic, bool isFaceUp, int sortingOrder) {
+    public void InitializeValues(CardLogic cardLogic) {
         this.cardLogic = cardLogic;
-        this.cardView.Initialize(cardLogic, isFaceUp, sortingOrder);
     }
     #endregion
 }

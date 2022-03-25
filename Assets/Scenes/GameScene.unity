@@ -565,8 +565,8 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4492574155720619941, guid: a6ea6ccba4b10ce4aa9b72db127d2e92, type: 3}
-      propertyPath: cardStackController
-      value: 
+      propertyPath: initialDrawStackSize
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6ea6ccba4b10ce4aa9b72db127d2e92, type: 3}

@@ -43,7 +43,7 @@ public class CardStackView : MonoBehaviour {
   private void InstantiateCard(CardLogic cardLogic, Vector3 position, bool isCardFaceUp, int sortingOrder) {
     Card currentCard = Instantiate(cardPrefab, cardInstantiator).GetComponent<Card>();
     if (currentCard != null) {
-      currentCard.InitializeValues(cardLogic, isCardFaceUp, sortingOrder);
+      currentCard.InitializeValues(cardLogic);
       currentCard.transform.localPosition = position;
     } else {
       Debug.LogError("Error: Tried to instantiate CardDisplay prefab, prefab did not contain CardDisplay script.");

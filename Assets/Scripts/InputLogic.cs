@@ -35,9 +35,9 @@ public class InputLogic {
     }
 
     private void ProcessCardClickEvent(GameObject card) {
-        // This is not safe if we rearrange the Card prefab
-        if (card.transform.parent.GetComponentInChildren<CardLogic>() != null) {
-            CardLogic clickedCard = card.transform.parent.GetComponentInChildren<CardLogic>();
+        CardPhysics clickedCardPhysics = card.GetComponent<CardPhysics>();
+        if (clickedCardPhysics.CardObject.GetComponent<Card>() != null) {
+            CardLogic clickedCard = clickedCardPhysics.CardObject.GetComponent<Card>().CardLogic;
             if (playerController.IsInPlayerHand(clickedCard)) {
                 playerController.SelectCard(clickedCard);
             }

@@ -8,8 +8,24 @@ public class PlayerController {
         [Header("Injected References")]
         [SerializeField]
         private CardStackLogic playerHand;
+        public CardStackLogic PlayerHand {
+            get { return playerHand; }
+            set { playerHand = value; }
+        }
+
+        [SerializeField]
+        private CardStackLogic drawStack;
+        public CardStackLogic DrawStack {
+            get { return drawStack; }
+            set { drawStack = value; }
+        }
+
         [SerializeField]
         private List<CardStackLogic> playStacks;
+        public List<CardStackLogic> PlayStacks {
+            get { return playStacks; }
+            set { playStacks = value; }
+        }
 
         [Header("Debugging Viewables")]
         [SerializeField]
@@ -17,8 +33,9 @@ public class PlayerController {
     #endregion
 
     #region Constructors
-    public PlayerController(CardStackLogic playerHand, List<CardStackLogic> playStacks) {
+    public PlayerController(CardStackLogic playerHand, CardStackLogic drawStack, List<CardStackLogic> playStacks) {
         this.playerHand = playerHand;
+        this.drawStack = drawStack;
         this.playStacks = playStacks;
     }
     #endregion
@@ -37,6 +54,18 @@ public class PlayerController {
         else {
             selectedCards.Remove(selectedCard);
         }
+    }
+
+    public void PlayFromStackToStack(CardStackLogic fromStack, CardStackLogic toStack) {
+        toStack.PlayToStack(fromStack.UseTop());
+    }
+
+    public void PlayFromHandToStack(CardStackLogic playStack) {
+        PlayFromStackToStack(playerHand, playStack);
+    }
+
+    public void DrawCard() {
+        PlayFromStackToStack(drawStack, playerHand);
     }
     #endregion
 }
