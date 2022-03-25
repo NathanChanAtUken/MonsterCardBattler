@@ -7,6 +7,8 @@ public class GameInjector : MonoBehaviour {
         [Header("Inspector Injected References")]
         [SerializeField]
         private InputManager inputManager;
+        [SerializeField]
+        private CardStackLayout cardStackLayout;
 
         [Header("Inspector Injected Parameters")]
         [SerializeField]
@@ -49,6 +51,8 @@ public class GameInjector : MonoBehaviour {
             playStacks.Add(newPlayStack);
         }
 
+        this.cardStackLayout.InitializePlayStacks(playStacks);
+
         return playStacks;
     }
 
@@ -56,17 +60,11 @@ public class GameInjector : MonoBehaviour {
         List<CardLogic> cards = new List<CardLogic>();
 
         CardStackLogic newPlayStack = new CardStackLogic(cards);
-        GameObject playStackObject = Instantiate(CardStackPrefab);
 
         for (int i = 0; i < numCards; i++) {
             CardLogic newCard = new CardLogic();
             cards.Add(newCard);
-
-            GameObject newCardObject = Instantiate(CardPrefab, playStackObject.transform);
-            newCardObject.GetComponent<Card>().InitializeValues(newCard);
         }
-
-        playStackObject.GetComponent<CardStack>().InitializeValues(newPlayStack);
 
         return newPlayStack;
     }
