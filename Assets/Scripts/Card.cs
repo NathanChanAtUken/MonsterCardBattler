@@ -7,6 +7,10 @@ public class Card : MonoBehaviour {
         [Header("Debugging Viewables")]
         [SerializeField]
         private CardLogic cardLogic;
+        public CardLogic CardLogic {
+            get { return cardLogic; }
+            set { cardLogic = value; }
+        }
     #endregion
     
     #region Initialization Methods

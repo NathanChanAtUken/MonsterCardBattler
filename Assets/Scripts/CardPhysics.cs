@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class CardPhysics : MonoBehaviour, IClickable {
     #region Fields
-        [Header("Injected Dependencies")]
+        [Header("Injected References")]
+        [SerializeField]
+        private GameObject cardObject;
+        public GameObject CardObject {
+            get { return cardObject; }
+            set { cardObject = value; }
+        }
+        
         [SerializeField]
         private MovementModule movementModule;
     #endregion

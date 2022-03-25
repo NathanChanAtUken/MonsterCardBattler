@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardLogic:
+    cardObject: {fileID: 0}
     color: 0
     suit: 0
     rank: 0
@@ -141,6 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 260da84077f3b464895d4bb737f0a8d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardObject: {fileID: 2194175682185816327}
   movementModule: {fileID: 5348369499900874173}
 --- !u!114 &5348369499900874173
 MonoBehaviour:

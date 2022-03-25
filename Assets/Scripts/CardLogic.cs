@@ -6,10 +6,19 @@ using UnityEngine;
 [System.Serializable]
 public class CardLogic {
     #region Fields
+        [Header("Injected References")]
+        [SerializeField]
+        private GameObject cardObject;
+        public GameObject CardObject {
+            get { return cardObject; }
+            set { cardObject = value; }
+        }
+
         public enum CardColor {
             Black = 0,
             Red = 1
         }
+        [Header("Card Properties")]
         [SerializeField]
         private CardColor color;
         public CardColor Color {
@@ -39,7 +48,9 @@ public class CardLogic {
     #endregion
 
     #region Constructors
-    public CardLogic(bool instantiateRandomized = true, CardColor color = CardColor.Red, CardSuit suit = CardSuit.Diamond, int rank = 1) {
+    public CardLogic(GameObject cardObject = null, bool instantiateRandomized = true, CardColor color = CardColor.Red, CardSuit suit = CardSuit.Diamond, int rank = 1) {
+        this.cardObject = cardObject;
+
         this.color = color;
         this.suit = suit;
         this.rank = rank;

@@ -6,6 +6,14 @@ using System.Linq;
 [System.Serializable]
 public class CardStackLogic {
     #region Fields
+        [Header("Injected References")]
+        [SerializeField]
+        private GameObject cardStackObject;
+        public GameObject CardStackObject {
+            get { return cardStackObject; }
+            set { cardStackObject = value; }
+        }
+
         [Header("Injected Parameters")]
         [SerializeField]
         private int stackLimit;
@@ -20,8 +28,9 @@ public class CardStackLogic {
     #endregion
 
     #region Initialization Methods
-    public CardStackLogic(List<CardLogic> cardStack = null, int stackLimit = int.MaxValue) {
-        StackLimit = stackLimit;
+    public CardStackLogic(GameObject cardStackObject = null, List<CardLogic> cardStack = null, int stackLimit = int.MaxValue) {
+        this.cardStackObject = cardStackObject;
+        this.stackLimit = stackLimit;
 
         if (cardStack == null) {
             this.cardStack = new List<CardLogic>();
@@ -35,6 +44,7 @@ public class CardStackLogic {
     #region Data Methods
     public void PlayCardAt(CardLogic playedCard, int index) {
         cardStack.Insert(index, playedCard);
+        playedCard.CardObject.transform.SetParent(cardStackObject.transform, true);
     }
 
     public void PlayToStack(CardLogic playedCard) {
@@ -48,7 +58,6 @@ public class CardStackLogic {
     public CardLogic TopCard() {
         return CardAt(cardStack.Count - 1);
     }
-
     public CardLogic RemoveAt(int index) {
         CardLogic removedCard = CardAt(index);
         cardStack.RemoveAt(index);
