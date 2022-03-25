@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CardStackView : MonoBehaviour {
-  [SerializeField] private GameObject cardPrefab;
   [SerializeField] private Transform cardInstantiator;
 
-  [SerializeField] private int extraVisibleCards = 2;
+  [SerializeField] private int extraVisibleCards = 1;
   [SerializeField] private Vector2 cardStackOffset = new Vector2(-50, 50);
 
   public void Initialize(CardStackLogic cardStackLogic) {
@@ -16,38 +15,40 @@ public class CardStackView : MonoBehaviour {
     }
 
     Vector3 cardPosition;
-    int sortOrder = 0;
     int actualExtraVisibleCards = Mathf.Min(this.extraVisibleCards, cardCount - 1);
-    bool showBottomStack = cardCount > actualExtraVisibleCards + 1;
+    int bottomStackCount = cardCount - 1 - actualExtraVisibleCards;
+    int i = 0;
 
     // Bottom Stack
-    if (showBottomStack) {
-      cardPosition = new Vector3(cardStackOffset.x * (actualExtraVisibleCards + 1), cardStackOffset.y * (actualExtraVisibleCards + 1), 0);
-      this.InstantiateCard(null, cardPosition, false, sortOrder);
-      sortOrder++;
+    for (; i < bottomStackCount; i++) {
+      cardPosition = new Vector3(cardStackOffset.x * (extraVisibleCards + 1), cardStackOffset.y * (extraVisibleCards + 1), 0);
+      this.ArrangeCard(cardStackLogic.CardAt(i).CardObject.GetComponent<Card>(), cardPosition, false, i);
     }
 
     // Visible Cards
-    for (int i = actualExtraVisibleCards; i > 0; i--) {
-      cardPosition = new Vector3(cardStackOffset.x * i, cardStackOffset.y * i, 0);
-      this.InstantiateCard(cardStackLogic.CardAt(cardCount - 1 - i), cardPosition, true, sortOrder);
-      sortOrder++;
+    for (; i < actualExtraVisibleCards + bottomStackCount; i++) {
+      cardPosition = new Vector3(cardStackOffset.x * (actualExtraVisibleCards - (i - bottomStackCount)), cardStackOffset.y * (actualExtraVisibleCards - (i - bottomStackCount)), 0);
+      this.ArrangeCard(cardStackLogic.CardAt(i).CardObject.GetComponent<Card>(), cardPosition, true, i);
     }
 
     // Top Card
     if (cardCount > 0) {
-      this.InstantiateCard(cardStackLogic.TopCard(), Vector3.zero, true, sortOrder);
+      this.ArrangeCard(cardStackLogic.TopCard().CardObject.GetComponent<Card>(), Vector3.zero, true, i);
     }
   }
 
-  private void InstantiateCard(CardLogic cardLogic, Vector3 position, bool isCardFaceUp, int sortingOrder) {
-    Card currentCard = Instantiate(cardPrefab, cardInstantiator).GetComponent<Card>();
-    if (currentCard != null) {
-      currentCard.InitializeValues(cardLogic);
-      currentCard.transform.localPosition = position;
+  private void ArrangeCard(Card card, Vector3 localPosition, bool isCardFaceUp, int sortingOrder) {
+    if (card != null && card.CardView != null) {
+      card.transform.SetParent(this.cardInstantiator);
+      card.transform.localPosition = localPosition;
+      card.CardView.SortingOrder = sortingOrder;
+      if (isCardFaceUp) {
+        card.CardView.ShowFront();
+      } else {
+        card.CardView.ShowBack();
+      }
     } else {
-      Debug.LogError("Error: Tried to instantiate CardDisplay prefab, prefab did not contain CardDisplay script.");
-      return;
+      Debug.LogError("Error: Attempted to arrange null card or null card view.");
     }
   }
 }

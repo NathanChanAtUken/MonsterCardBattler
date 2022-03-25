@@ -9,6 +9,10 @@ public class CardStack : MonoBehaviour {
         private CardStackLogic cardStackLogic;
         [SerializeField]
         private CardStackView cardStackView;
+        public CardStackView CardStackView {
+          get { return this.cardStackView; }
+          set { this.cardStackView = value; }
+        }
     #endregion
     
     #region Initialization Methods

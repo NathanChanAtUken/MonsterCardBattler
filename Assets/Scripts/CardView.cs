@@ -10,7 +10,12 @@ public class CardView : MonoBehaviour {
   [SerializeField] private SpriteRenderer suitRenderer;
   [SerializeField] private SpriteRenderer numberCornerRenderer;
   [SerializeField] private SpriteRenderer numberCenterRenderer;
+
   [SerializeField] private SortingGroup sortingGroup;
+  public int SortingOrder {
+    get { return this.sortingGroup.sortingOrder; }
+    set { this.sortingGroup.sortingOrder = value; }
+  }
 
   public void Initialize(CardLogic cardLogic, bool isFaceUp = true, int sortingOrder = 0) {
     this.sortingGroup.sortingOrder = sortingOrder;

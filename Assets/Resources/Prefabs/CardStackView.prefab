@@ -157,7 +157,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7723d7bc041df4b148e1123a755c0c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 2194175682185816327, guid: 1cd7d0359de6de143851ed932ee7b9f0, type: 3}
   cardInstantiator: {fileID: 3552272072637325496}
-  extraVisibleCards: 2
+  extraVisibleCards: 1
   cardStackOffset: {x: -50, y: 50}

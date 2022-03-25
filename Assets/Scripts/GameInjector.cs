@@ -8,7 +8,7 @@ public class GameInjector : MonoBehaviour {
         [SerializeField]
         private InputManager inputManager;
         [SerializeField]
-        private CardStackLayout cardStackLayout;
+        private GameView gameView;
 
         [Header("Inspector Injected Parameters")]
         [SerializeField]
@@ -61,7 +61,7 @@ public class GameInjector : MonoBehaviour {
             playStacks.Add(newPlayStack);
         }
 
-        this.cardStackLayout.InitializePlayStacks(playStacks);
+        this.gameView.ArrangePlayStacks(playStacks);
 
         return playStacks;
     }

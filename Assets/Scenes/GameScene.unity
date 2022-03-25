@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 807447113}
   - component: {fileID: 807447112}
   m_Layer: 0
-  m_Name: CardStackLayout
+  m_Name: GameView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -361,8 +361,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 784e5eb59fd2b4ab790023da0db116f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardStackPrefab: {fileID: 3573924594031950365, guid: 3fff10280b032004c859ac1f14916917, type: 3}
-  PlayerHandPrefab: {fileID: 4645862867120531857, guid: 01dc1d7fe877eb64d9caf9257b09cd49, type: 3}
   cardStackInstantiator: {fileID: 629323780}
   playerHandInstantiator: {fileID: 170165143}
   horizontalSpacing: 450
@@ -537,6 +535,10 @@ PrefabInstance:
       value: GameInjector
       objectReference: {fileID: 0}
     - target: {fileID: 4492574155720619941, guid: a6ea6ccba4b10ce4aa9b72db127d2e92, type: 3}
+      propertyPath: gameView
+      value: 
+      objectReference: {fileID: 807447112}
+    - target: {fileID: 4492574155720619941, guid: a6ea6ccba4b10ce4aa9b72db127d2e92, type: 3}
       propertyPath: CardPrefab
       value: 
       objectReference: {fileID: 2194175682185816327, guid: 1cd7d0359de6de143851ed932ee7b9f0, type: 3}
@@ -555,7 +557,7 @@ PrefabInstance:
     - target: {fileID: 4492574155720619941, guid: a6ea6ccba4b10ce4aa9b72db127d2e92, type: 3}
       propertyPath: cardStackLayout
       value: 
-      objectReference: {fileID: 807447112}
+      objectReference: {fileID: 0}
     - target: {fileID: 4492574155720619941, guid: a6ea6ccba4b10ce4aa9b72db127d2e92, type: 3}
       propertyPath: initialHandSize
       value: 3
