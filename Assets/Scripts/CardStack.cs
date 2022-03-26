@@ -2,23 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardStack : MonoBehaviour {
+public abstract class CardStack : MonoBehaviour {
     #region Fields
         [Header("Debugging Viewables")]
         [SerializeField]
-        private CardStackLogic cardStackLogic;
-        [SerializeField]
-        private CardStackView cardStackView;
-        public CardStackView CardStackView {
-          get { return this.cardStackView; }
-          set { this.cardStackView = value; }
-        }
+        protected CardStackLogic cardStackLogic;
     #endregion
     
     #region Initialization Methods
-    public void InitializeValues(CardStackLogic cardStackLogic) {
-        this.cardStackLogic = cardStackLogic;
-        this.cardStackView.Initialize(cardStackLogic);
-    }
+    public abstract void InitializeValues(CardStackLogic cardStackLogic);
     #endregion
+
+    public abstract void Refresh(CardStackLogic cardStackLogic);
 }

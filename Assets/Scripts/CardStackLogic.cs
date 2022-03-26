@@ -44,7 +44,7 @@ public class CardStackLogic {
     #region Data Methods
     public void PlayCardAt(CardLogic playedCard, int index) {
         cardStack.Insert(index, playedCard);
-        playedCard.CardObject.transform.SetParent(cardStackObject.transform, true);
+        cardStackObject.GetComponent<CardStack>().Refresh(this);
     }
 
     public void PlayToStack(CardLogic playedCard) {

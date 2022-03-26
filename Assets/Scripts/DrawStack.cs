@@ -2,24 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHand : CardStack {
+public class DrawStack : CardStack {
     #region Fields
         [SerializeField]
-        private PlayerHandView playerHandView;
-        public PlayerHandView PlayerHandView {
-          get { return this.playerHandView; }
-          set { this.playerHandView = value; }
+        private DrawStackView drawStackView;
+        public DrawStackView DrawStackView {
+          get { return this.drawStackView; }
+          set { this.drawStackView = value; }
         }
     #endregion
     
     #region Initialization Methods
     public override void InitializeValues(CardStackLogic cardStackLogic) {
         this.cardStackLogic = cardStackLogic;
-        this.playerHandView.Initialize(cardStackLogic);
+        this.drawStackView.Initialize(cardStackLogic);
     }
     #endregion
 
     public override void Refresh(CardStackLogic cardStackLogic) {
-        this.playerHandView.Initialize(cardStackLogic);
+        this.drawStackView.Initialize(cardStackLogic);
     }
 }

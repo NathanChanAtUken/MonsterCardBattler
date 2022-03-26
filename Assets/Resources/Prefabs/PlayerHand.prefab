@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1337616978481514445}
+  - component: {fileID: 5575380736225860883}
   m_Layer: 0
   m_Name: PlayerHand
   m_TagString: Untagged
@@ -26,7 +27,98 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 6423912196210879228}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5575380736225860883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4645862867120531857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3b3d34c4786e400dbe16b9cb821e969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHandLogic:
+    cardStackObject: {fileID: 0}
+    stackLimit: 0
+    cardStack: []
+  playerHandView: {fileID: 3971088257465419842}
+--- !u!1001 &6707534477500495604
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1337616978481514445}
+    m_Modifications:
+    - target: {fileID: 302762667799010312, guid: 8e8af346c3f2c45ee9051df87595d4a2, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 302762667799010312, guid: 8e8af346c3f2c45ee9051df87595d4a2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 302762667799010312, guid: 8e8af346c3f2c45ee9051df87595d4a2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 302762667799010312, guid: 8e8af346c3f2c45ee9051df87595d4a2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 302762667799010312, guid: 8e8af346c3f2c45ee9051df87595d4a2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 302762667799010312, guid: 8e8af346c3f2c45ee9051df87595d4a2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 302762667799010312, guid: 8e8af346c3f2c45ee9051df87595d4a2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 302762667799010312, guid: 8e8af346c3f2c45ee9051df87595d4a2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 302762667799010312, guid: 8e8af346c3f2c45ee9051df87595d4a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 302762667799010312, guid: 8e8af346c3f2c45ee9051df87595d4a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 302762667799010312, guid: 8e8af346c3f2c45ee9051df87595d4a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6466145154838179426, guid: 8e8af346c3f2c45ee9051df87595d4a2, type: 3}
+      propertyPath: m_Name
+      value: PlayerHandView
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8e8af346c3f2c45ee9051df87595d4a2, type: 3}
+--- !u!4 &6423912196210879228 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 302762667799010312, guid: 8e8af346c3f2c45ee9051df87595d4a2, type: 3}
+  m_PrefabInstance: {fileID: 6707534477500495604}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3971088257465419842 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7640867676875243190, guid: 8e8af346c3f2c45ee9051df87595d4a2, type: 3}
+  m_PrefabInstance: {fileID: 6707534477500495604}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e325ca94a6b6499295cab4609df60bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

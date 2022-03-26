@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class GameView : MonoBehaviour {
   [Header("Prefab Instantiators")]
-  [SerializeField]
-  private Transform cardStackInstantiator, playerHandInstantiator;
+  [SerializeField] private Transform cardStackInstantiator;
+  [SerializeField] private Transform playerHandInstantiator;
+  [SerializeField] private Transform drawStackInstantiator;
 
   [Header("Layout Parameters")]
   [SerializeField]
@@ -13,9 +14,12 @@ public class GameView : MonoBehaviour {
 
   private List<CardStack> cardStacks;
   private PlayerHand playerHand;
+  private DrawStack drawStack;
 
-  public void ArrangePlayStacks(List<CardStackLogic> cardStackLogics) {
+  public void Initialize(List<CardStackLogic> cardStackLogics, CardStackLogic playerHandLogic, CardStackLogic drawStackLogic) {
     this.ArrangePlayStacks(cardStackLogics.Select(logic => logic.CardStackObject.GetComponent<CardStack>()).ToList());
+    this.ArrangePlayerHand(playerHandLogic.CardStackObject.GetComponent<PlayerHand>());
+    this.ArrangeDrawStack(drawStackLogic.CardStackObject.GetComponent<DrawStack>());
   }
 
   public void ArrangePlayStacks(List<CardStack> cardStacks) {
@@ -29,5 +33,19 @@ public class GameView : MonoBehaviour {
       cardStacks[i].transform.localScale = Vector3.one;
       this.cardStacks.Add(cardStacks[i]);
     }
+  }
+
+  public void ArrangePlayerHand(PlayerHand playerHand) {
+    playerHand.transform.SetParent(this.playerHandInstantiator);
+    playerHand.transform.localPosition = Vector3.zero;
+    playerHand.transform.localScale = Vector3.one;
+    this.playerHand = playerHand;
+  }
+
+  public void ArrangeDrawStack(DrawStack drawStack) {
+    drawStack.transform.SetParent(this.drawStackInstantiator);
+    drawStack.transform.localPosition = Vector3.zero;
+    drawStack.transform.localScale = Vector3.one;
+    this.drawStack = drawStack;
   }
 }
