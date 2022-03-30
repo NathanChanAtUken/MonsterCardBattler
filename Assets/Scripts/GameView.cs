@@ -12,18 +12,18 @@ public class GameView : MonoBehaviour {
   [SerializeField]
   private float horizontalSpacing;
 
-  private List<PlayCardStack> cardStacks;
-  private PlayerHand playerHand;
-  private DrawStack drawStack;
+  private List<CardStack> cardStacks;
+  private CardStack playerHand;
+  private CardStack drawStack;
 
   public void Initialize(List<CardStackLogic> cardStackLogics, CardStackLogic playerHandLogic, CardStackLogic drawStackLogic) {
-    this.RefreshPlayStacks(cardStackLogics.Select(logic => logic.CardStackObject.GetComponent<PlayCardStack>()).ToList());
-    this.RefreshPlayerHand(playerHandLogic.CardStackObject.GetComponent<PlayerHand>());
-    this.RefreshDrawStack(drawStackLogic.CardStackObject.GetComponent<DrawStack>());
+    this.RefreshPlayStacks(cardStackLogics.Select(logic => logic.CardStackObject.GetComponent<CardStack>()).ToList());
+    this.RefreshPlayerHand(playerHandLogic.CardStackObject.GetComponent<CardStack>());
+    this.RefreshDrawStack(drawStackLogic.CardStackObject.GetComponent<CardStack>());
   }
 
-  public void RefreshPlayStacks(List<PlayCardStack> cardStacks) {
-    this.cardStacks = new List<PlayCardStack>();
+  public void RefreshPlayStacks(List<CardStack> cardStacks) {
+    this.cardStacks = new List<CardStack>();
 
     float totalWidth = (cardStacks.Count - 1) * horizontalSpacing;
     for (int i = 0; i < cardStacks.Count; i++) {
@@ -35,14 +35,14 @@ public class GameView : MonoBehaviour {
     }
   }
 
-  public void RefreshPlayerHand(PlayerHand playerHand) {
+  public void RefreshPlayerHand(CardStack playerHand) {
     playerHand.transform.SetParent(this.playerHandInstantiator);
     playerHand.transform.localPosition = Vector3.zero;
     playerHand.transform.localScale = Vector3.one;
     this.playerHand = playerHand;
   }
 
-  public void RefreshDrawStack(DrawStack drawStack) {
+  public void RefreshDrawStack(CardStack drawStack) {
     drawStack.transform.SetParent(this.drawStackInstantiator);
     drawStack.transform.localPosition = Vector3.zero;
     drawStack.transform.localScale = Vector3.one;

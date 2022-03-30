@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6117533036443406700}
-  - component: {fileID: 5396324366915819315}
+  - component: {fileID: 2814617472985953536}
   m_Layer: 0
   m_Name: DrawStack
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5396324366915819315
+--- !u!114 &2814617472985953536
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,14 +41,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 435890139817099056}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e231631e0a7e4d2999338290fcbb74b, type: 3}
+  m_Script: {fileID: 11500000, guid: f40dd551797f689418158728d0497233, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cardStackLogic:
     cardStackObject: {fileID: 0}
     stackLimit: 0
     cardStack: []
-  drawStackView: {fileID: 4302264761392022360}
+  cardStackView: {fileID: 4302264761392022360}
 --- !u!1001 &5661846544188687342
 PrefabInstance:
   m_ObjectHideFlags: 0
