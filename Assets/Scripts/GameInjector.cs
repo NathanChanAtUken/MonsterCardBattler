@@ -52,7 +52,7 @@ public class GameInjector : MonoBehaviour {
     }
 
     private CardStackLogic InitializePlayerHand(int initialHandSize) {
-        return InitializeStack(Instantiate(PlayerHandPrefab).GetComponent<CardStack>(), 0, "PlayerHand", initialHandSize);
+        return InitializeStack(Instantiate(PlayerHandPrefab).GetComponent<CardStack>(), initialHandSize, "PlayerHand", initialHandSize);
     }
 
     private CardStackLogic InitializeDrawStack(int initialDrawStackSize) {

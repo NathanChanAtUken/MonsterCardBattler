@@ -6,12 +6,12 @@ public abstract class CardStack : MonoBehaviour {
     #region Fields
         [Header("Debugging Viewables")]
         [SerializeField]
-        protected CardStackLogic cardStackLogic;
+        public CardStackLogic cardStackLogic;
     #endregion
     
     #region Initialization Methods
     public abstract void InitializeValues(CardStackLogic cardStackLogic);
     #endregion
 
-    public abstract void Refresh(CardStackLogic cardStackLogic);
+    public abstract void AddCardToStack(Card card);
 }

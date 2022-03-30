@@ -19,7 +19,7 @@ public class PlayCardStack : CardStack {
     }
     #endregion
 
-    public override void Refresh(CardStackLogic cardStackLogic) {
-        this.playCardStackView.Initialize(cardStackLogic);
+    public override void AddCardToStack(Card card) {
+        this.playCardStackView.AddCardToStack(card);
     }
 }

@@ -19,7 +19,7 @@ public class DrawStack : CardStack {
     }
     #endregion
 
-    public override void Refresh(CardStackLogic cardStackLogic) {
-        this.drawStackView.Initialize(cardStackLogic);
+    public override void AddCardToStack(Card card) {
+        // TO BE IMPLEMENTED
     }
 }
