@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ace303f7ba044e38890f47b4e844e43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawStackInstantiator: {fileID: 5042783584309723723}
+  cardInstantiator: {fileID: 5042783584309723723}
   horizontalSpacing: 25
 --- !u!1 &8560378238013915221
 GameObject:
@@ -56,7 +56,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5042783584309723723}
   m_Layer: 0
-  m_Name: DrawStackInstantiator
+  m_Name: CardInstantiator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

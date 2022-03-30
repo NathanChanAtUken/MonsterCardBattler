@@ -2,53 +2,72 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardStackView : MonoBehaviour {
-  [SerializeField] private Transform cardInstantiator;
+public abstract class CardStackView : MonoBehaviour {
+  [Header("Prefab Instantiators")]
+  [SerializeField] protected Transform cardInstantiator;
 
-  [SerializeField] private int extraVisibleCards = 1;
-  [SerializeField] private Vector2 cardStackOffset = new Vector2(-50, 50);
+  protected List<Card> cards;
 
   public void Initialize(CardStackLogic cardStackLogic) {
     int cardCount = cardStackLogic.StackLimit - cardStackLogic.EmptySlots();
-    if (cardCount <= 0) {
-      return;
+    cards = new List<Card>();
+    for (int cardIndex = 0; cardIndex < cardCount; cardIndex++) {
+      cards.Add(cardStackLogic.CardAt(cardIndex).CardObject.GetComponent<Card>());
     }
 
-    Vector3 cardPosition;
-    int actualExtraVisibleCards = Mathf.Min(this.extraVisibleCards, cardCount - 1);
-    int bottomStackCount = cardCount - 1 - actualExtraVisibleCards;
-    int i = 0;
-
-    // Bottom Stack
-    for (; i < bottomStackCount; i++) {
-      cardPosition = new Vector3(cardStackOffset.x * (extraVisibleCards + 1), cardStackOffset.y * (extraVisibleCards + 1), 0);
-      this.ArrangeCard(cardStackLogic.CardAt(i).CardObject.GetComponent<Card>(), cardPosition, false, i);
-    }
-
-    // Visible Cards
-    for (; i < actualExtraVisibleCards + bottomStackCount; i++) {
-      cardPosition = new Vector3(cardStackOffset.x * (actualExtraVisibleCards - (i - bottomStackCount)), cardStackOffset.y * (actualExtraVisibleCards - (i - bottomStackCount)), 0);
-      this.ArrangeCard(cardStackLogic.CardAt(i).CardObject.GetComponent<Card>(), cardPosition, true, i);
-    }
-
-    // Top Card
-    if (cardCount > 0) {
-      this.ArrangeCard(cardStackLogic.TopCard().CardObject.GetComponent<Card>(), Vector3.zero, true, i);
-    }
+    this.RefreshAllCards(false);
   }
 
-  private void ArrangeCard(Card card, Vector3 localPosition, bool isCardFaceUp, int sortingOrder) {
-    if (card != null && card.CardView != null) {
+  public void AddCardToStack(Card card) {
+    this.cards.Add(card);
+    this.RefreshAllCards(true);
+  }
+
+  public void RemoveCardFromStack(Card card) {
+    if (this.cards.Remove(card)) {
+      Debug.LogError("Error: Tried removing a card from card stack that does not exist.");
+    }
+
+    this.RefreshAllCards(true);
+  }
+
+  public void RefreshAllCards(bool animate) {
+    for (int i = 0; i < this.cards.Count; i++) {
+      Card card = this.cards[i];
+
       card.transform.SetParent(this.cardInstantiator);
-      card.transform.localPosition = localPosition;
-      card.CardView.SortingOrder = sortingOrder;
-      if (isCardFaceUp) {
-        card.CardView.ShowFront();
-      } else {
-        card.CardView.ShowBack();
+      card.CardView.SortingOrder = this.GetCardSortingOrder(i);
+
+      Vector3 newLocalPosition = this.GetCardLocalPosition(i);
+      if (card.transform.localPosition != newLocalPosition) {
+        if (animate) {
+          card.CardView.MoveToLocal(newLocalPosition);
+        } else {
+          card.transform.localPosition = newLocalPosition;
+        }
       }
-    } else {
-      Debug.LogError("Error: Attempted to arrange null card or null card view.");
+
+      if (this.ShouldCardBeFaceUp(i)) {
+        if (card.CardView.IsFaceUp == false) {
+          if (animate) {
+            card.CardView.FlipCardUp();
+          } else {
+            card.CardView.ShowFront();
+          }
+        }
+      } else if (card.CardView.IsFaceUp) {
+        if (animate) {
+          card.CardView.FlipCardDown();
+        } else {
+          card.CardView.ShowBack();
+        }
+      }
     }
   }
+
+  public abstract Vector3 GetCardLocalPosition(int cardIndex);
+
+  public abstract bool ShouldCardBeFaceUp(int cardIndex);
+
+  public abstract int GetCardSortingOrder(int cardIndex);
 }

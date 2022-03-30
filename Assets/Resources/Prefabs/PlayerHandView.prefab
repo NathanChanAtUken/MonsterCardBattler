@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e325ca94a6b6499295cab4609df60bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHandInstantiator: {fileID: 7889320168846422515}
+  cardInstantiator: {fileID: 7889320168846422515}
   horizontalSpacing: 300
 --- !u!1 &6794661559404884973
 GameObject:
@@ -56,7 +56,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7889320168846422515}
   m_Layer: 0
-  m_Name: PlayerHandInstantiator
+  m_Name: CardInstantiator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
