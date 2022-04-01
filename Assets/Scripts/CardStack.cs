@@ -7,6 +7,10 @@ public class CardStack : MonoBehaviour {
         [Header("Debugging Viewables")]
         [SerializeField]
         private CardStackLogic cardStackLogic;
+        public CardStackLogic CardStackLogic {
+            get { return cardStackLogic; }
+            set { cardStackLogic = value; }
+        }
     #endregion
     
     #region Initialization Methods

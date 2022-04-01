@@ -64,6 +64,12 @@ public class CardStackLogic {
         return removedCard;
     }
 
+    public int Remove(CardLogic cardToRemove) {
+        int indexOfCardToRemove = cardStack.IndexOf(cardToRemove);
+        cardStack.Remove(cardToRemove);
+        return indexOfCardToRemove;
+    }
+
     public CardLogic UseTop() {
         return RemoveAt(cardStack.Count - 1);
     }

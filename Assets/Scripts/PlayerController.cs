@@ -30,6 +30,10 @@ public class PlayerController {
         [Header("Debugging Viewables")]
         [SerializeField]
         private List<CardLogic> selectedCards = new List<CardLogic>();
+        public List<CardLogic> SelectedCards {
+            get { return selectedCards; }
+            set { selectedCards = value; }
+        }
     #endregion
 
     #region Constructors
@@ -48,24 +52,32 @@ public class PlayerController {
 
     #region Event Methods
     public void SelectCard(CardLogic selectedCard) {
-        if (!selectedCards.Contains(selectedCard)) {
-            selectedCards.Add(selectedCard);
+        if (selectedCards.Contains(selectedCard)) {
+            return;
         }
-        else {
-            selectedCards.Remove(selectedCard);
-        }
+
+        selectedCards.Add(selectedCard);
     }
 
-    public void PlayFromStackToStack(CardStackLogic fromStack, CardStackLogic toStack) {
-        toStack.PlayToStack(fromStack.UseTop());
+    public void DeselectCard(CardLogic deselectedCard) {
+        if (!selectedCards.Contains(deselectedCard)) {
+            return;
+        }
+
+        selectedCards.Remove(deselectedCard);
     }
 
-    public void PlayFromHandToStack(CardStackLogic playStack) {
-        PlayFromStackToStack(playerHand, playStack);
+    public void PlayFromStackToStack(CardLogic cardPlayed, CardStackLogic fromStack, CardStackLogic toStack) {
+        fromStack.Remove(cardPlayed);
+        toStack.PlayToStack(cardPlayed);
+    }
+
+    public void PlayFromHandToStack(CardLogic cardPlayed, CardStackLogic playStack) {
+        PlayFromStackToStack(cardPlayed, playerHand, playStack);
     }
 
     public void DrawCard() {
-        PlayFromStackToStack(drawStack, playerHand);
+        PlayFromStackToStack(drawStack.TopCard(), drawStack, playerHand);
     }
     #endregion
 }
