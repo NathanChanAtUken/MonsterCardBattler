@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 1866031562857025159}
   - component: {fileID: 1039260834620021173}
   m_Layer: 0
-  m_Name: Number_Corner
+  m_Name: NumberCenter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -261,7 +261,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5927880487374276050
 Transform:
   m_ObjectHideFlags: 0
@@ -402,10 +402,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8791793621088698394}
-  - component: {fileID: -1849864536230497276}
+  - component: {fileID: 930717128193411532}
   - component: {fileID: 8258570223525616224}
   m_Layer: 0
-  m_Name: CardDisplay
+  m_Name: CardView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -426,7 +426,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-1849864536230497276
+--- !u!114 &930717128193411532
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -442,7 +442,7 @@ MonoBehaviour:
   cardBack: {fileID: 4309989772804991883}
   cardFront: {fileID: 7413042577444876121}
   suitRenderer: {fileID: 8678305020110704801}
-  numberMiddleRenderer: {fileID: 5729969598370859387}
+  numberCornerRenderer: {fileID: 5729969598370859387}
   numberCenterRenderer: {fileID: 1039260834620021173}
   sortingGroup: {fileID: 8258570223525616224}
 --- !u!210 &8258570223525616224
@@ -467,7 +467,7 @@ GameObject:
   - component: {fileID: 1528276268349925428}
   - component: {fileID: 5729969598370859387}
   m_Layer: 0
-  m_Name: Number_Middle
+  m_Name: NumberCorner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

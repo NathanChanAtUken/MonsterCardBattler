@@ -44,13 +44,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputManager: {fileID: 0}
+  gameView: {fileID: 0}
   numCardStacks: 0
   numCardsPerStack: 0
   initialHandSize: 0
-  CardPrefab: {fileID: 0}
-  CardStackPrefab: {fileID: 0}
+  initialDrawStackSize: 0
+  CardPrefab: {fileID: 2194175682185816327, guid: 1cd7d0359de6de143851ed932ee7b9f0, type: 3}
+  PlayCardStackPrefab: {fileID: 1684334018666303265, guid: 8c452c0b6a2bd4630b9a393550acdc85, type: 3}
+  PlayerHandPrefab: {fileID: 4645862867120531857, guid: 01dc1d7fe877eb64d9caf9257b09cd49, type: 3}
+  DrawStackPrefab: {fileID: 435890139817099056, guid: 074516f4b73324ade843f36afbe29047, type: 3}
   playerController:
     playerHand:
+      cardStackObject: {fileID: 0}
+      stackLimit: 0
+      cardStack: []
+    drawStack:
+      cardStackObject: {fileID: 0}
       stackLimit: 0
       cardStack: []
     playStacks: []
@@ -59,6 +68,23 @@ MonoBehaviour:
     inputManager: {fileID: 0}
     playerController:
       playerHand:
+        cardStackObject: {fileID: 0}
+        stackLimit: 0
+        cardStack: []
+      drawStack:
+        cardStackObject: {fileID: 0}
+        stackLimit: 0
+        cardStack: []
+      playStacks: []
+      selectedCards: []
+  gameLogic:
+    playerController:
+      playerHand:
+        cardStackObject: {fileID: 0}
+        stackLimit: 0
+        cardStack: []
+      drawStack:
+        cardStackObject: {fileID: 0}
         stackLimit: 0
         cardStack: []
       playStacks: []

@@ -41,7 +41,7 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: CardDisplay
+  - name: CardView
     uniqueID: 745044827
     locked: 0
   - name: CardStack

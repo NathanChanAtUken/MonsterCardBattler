@@ -3,16 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class CardDisplay : MonoBehaviour {
+public class CardView : MonoBehaviour {
   [SerializeField] private SpriteDictionary cardSprites;
   [SerializeField] private GameObject cardBack;
   [SerializeField] private GameObject cardFront;
   [SerializeField] private SpriteRenderer suitRenderer;
-  [SerializeField] private SpriteRenderer numberMiddleRenderer;
+  [SerializeField] private SpriteRenderer numberCornerRenderer;
   [SerializeField] private SpriteRenderer numberCenterRenderer;
-  [SerializeField] private SortingGroup sortingGroup;
 
-  public void Initialize(CardLogic cardLogic, bool showFront = true, int sortingOrder = 0) {
+  [SerializeField] private SortingGroup sortingGroup;
+  public int SortingOrder {
+    get { return this.sortingGroup.sortingOrder; }
+    set { this.sortingGroup.sortingOrder = value; }
+  }
+
+  public bool IsFaceUp {
+    get { return this.cardFront.gameObject.activeSelf; }
+  }
+
+  private void Start() {
+
+  }
+
+  public void Initialize(CardLogic cardLogic, bool isFaceUp = true, int sortingOrder = 0) {
     this.sortingGroup.sortingOrder = sortingOrder;
 
     if (cardLogic == null) {
@@ -21,10 +34,10 @@ public class CardDisplay : MonoBehaviour {
     }
 
     this.suitRenderer.sprite = this.GetSuitSprite(cardLogic.Suit);
-    this.numberMiddleRenderer.sprite = this.GetNumberSprite(cardLogic.Color, cardLogic.Rank);
+    this.numberCornerRenderer.sprite = this.GetNumberSprite(cardLogic.Color, cardLogic.Rank);
     this.numberCenterRenderer.sprite = this.GetNumberSprite(cardLogic.Color, cardLogic.Rank);
 
-    if (showFront) {
+    if (isFaceUp) {
       this.ShowFront();
     } else {
       this.ShowBack();
@@ -39,6 +52,28 @@ public class CardDisplay : MonoBehaviour {
   public void ShowBack() {
     this.cardFront.SetActive(false);
     this.cardBack.SetActive(true);
+  }
+
+  public void FlipCardUp(float animDuration = 0.25f) {
+    LeanTween.rotateY(this.gameObject, 90f, animDuration).setEaseInExpo().setOnComplete(() => {
+      this.ShowFront();
+      LeanTween.rotateY(this.gameObject, 0f, animDuration).setEaseOutExpo();
+    });
+  }
+
+  public void FlipCardDown(float animDuration = 0.25f) {
+    LeanTween.rotateY(this.gameObject, 90f, animDuration).setEaseInExpo().setOnComplete(() => {
+      this.ShowBack();
+      LeanTween.rotateY(this.gameObject, 180f, animDuration).setEaseOutExpo();
+    });
+  }
+
+  public void MoveTo(Vector3 targetPosition, float animDuration = 0.5f) {
+    LeanTween.move(this.transform.parent.gameObject, targetPosition, animDuration);
+  }
+
+  public void MoveToLocal(Vector3 targetPosition, float animDuration = 0.5f) {
+    LeanTween.moveLocal(this.transform.parent.gameObject, targetPosition, animDuration);
   }
 
   private Sprite GetNumberSprite(CardLogic.CardColor cardColor, int rank) {
