@@ -34,6 +34,9 @@ public class PlayerController {
             get { return selectedCards; }
             set { selectedCards = value; }
         }
+
+        public delegate void OnPlayFromStackToStack(CardLogic cardPlayed, CardStackLogic fromStack, CardStackLogic toStack);
+        public event OnPlayFromStackToStack playFromStackToStackEvent;
     #endregion
 
     #region Constructors
@@ -70,6 +73,7 @@ public class PlayerController {
     public void PlayFromStackToStack(CardLogic cardPlayed, CardStackLogic fromStack, CardStackLogic toStack) {
         fromStack.Remove(cardPlayed);
         toStack.PlayToStack(cardPlayed);
+        playFromStackToStackEvent?.Invoke(cardPlayed, fromStack, toStack);
     }
 
     public void PlayFromHandToStack(CardLogic cardPlayed, CardStackLogic playStack) {

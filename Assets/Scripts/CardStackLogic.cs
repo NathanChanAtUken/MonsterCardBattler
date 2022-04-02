@@ -44,6 +44,7 @@ public class CardStackLogic {
     #region Data Methods
     public void PlayCardAt(CardLogic playedCard, int index) {
         cardStack.Insert(index, playedCard);
+        playedCard.CardObject.transform.SetParent(cardStackObject.transform);
     }
 
     public void PlayToStack(CardLogic playedCard) {
@@ -60,12 +61,14 @@ public class CardStackLogic {
     public CardLogic RemoveAt(int index) {
         CardLogic removedCard = CardAt(index);
         cardStack.RemoveAt(index);
+        removedCard.CardObject.transform.SetParent(null);
         return removedCard;
     }
 
     public int Remove(CardLogic cardToRemove) {
         int indexOfCardToRemove = cardStack.IndexOf(cardToRemove);
         cardStack.Remove(cardToRemove);
+        cardToRemove.CardObject.transform.SetParent(null);
         return indexOfCardToRemove;
     }
 
