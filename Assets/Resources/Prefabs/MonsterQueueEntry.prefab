@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8854038615967157518}
   - component: {fileID: 530425099284299118}
   - component: {fileID: 4789849747179891595}
+  - component: {fileID: 2882844239284131047}
   m_Layer: 5
   m_Name: MonsterQueueEntry
   m_TagString: Untagged
@@ -37,7 +38,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -78.9}
-  m_SizeDelta: {x: 220, y: 70}
+  m_SizeDelta: {x: 200, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &530425099284299118
 CanvasRenderer:
@@ -77,6 +78,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2882844239284131047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2256167182487611612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 399877344ad224014a7dcbf45c918a29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionIcon: {fileID: 1345339059301617479}
+  actionText: {fileID: 697504690000759473}
+  background: {fileID: 4789849747179891595}
+  attackIcon: {fileID: 21300000, guid: e56955c0692d14a5da42b045aa482e44, type: 3}
+  defendIcon: {fileID: 21300000, guid: 5191f93d90f6b4289a6cd585c1d22743, type: 3}
 --- !u!1 &3193502661664809948
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,7 +130,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 70, y: 0}
-  m_SizeDelta: {x: 140, y: 50}
+  m_SizeDelta: {x: 120, y: 50}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &5156428714866564854
 CanvasRenderer:
@@ -169,8 +187,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
