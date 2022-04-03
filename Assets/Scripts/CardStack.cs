@@ -13,12 +13,13 @@ public class CardStack : MonoBehaviour {
         }
 
         [SerializeField]
-        public CardStackView cardStackView;
+        private CardStackView cardStackView;
     #endregion
     
     #region Initialization Methods
-    public void InitializeValues(CardStackLogic cardStackLogic) {
+    public void InitializeValues(CardStackLogic cardStackLogic, CardStackView cardStackView) {
         this.cardStackLogic = cardStackLogic;
+        this.cardStackView = cardStackView;
         this.cardStackView.Initialize(cardStackLogic);
     }
     #endregion

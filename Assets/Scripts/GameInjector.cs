@@ -24,13 +24,15 @@ public class GameInjector : MonoBehaviour {
         [SerializeField]
         private GameObject CardPrefab;
         [SerializeField]
-        private GameObject PlayCardStackPrefab;
+        private GameObject CardStackPrefab;
         [SerializeField]
-        private GameObject PlayerHandPrefab;
+        private GameObject PlayCardStackViewPrefab;
         [SerializeField]
-        private GameObject DrawStackPrefab;
+        private GameObject PlayerHandViewPrefab;
+        [SerializeField]
+        private GameObject DrawStackViewPrefab;
 
-        [Header("Debugging Viewables")]
+  [Header("Debugging Viewables")]
         [SerializeField]
         private PlayerController playerController;
         [SerializeField]
@@ -52,25 +54,27 @@ public class GameInjector : MonoBehaviour {
     }
 
     private CardStackLogic InitializePlayerHand(int initialHandSize) {
-        return InitializeStack(Instantiate(PlayerHandPrefab).GetComponent<CardStack>(), initialHandSize, "PlayerHand", initialHandSize);
+        return InitializeStack(PlayerHandViewPrefab, initialHandSize, "PlayerHand", initialHandSize);
     }
 
     private CardStackLogic InitializeDrawStack(int initialDrawStackSize) {
-        return InitializeStack(Instantiate(DrawStackPrefab).GetComponent<CardStack>(), initialDrawStackSize, "DrawStack");
+        return InitializeStack(DrawStackViewPrefab, initialDrawStackSize, "DrawStack");
     }
 
     private List<CardStackLogic> InitializePlayStacks() {
         List<CardStackLogic> playStacks = new List<CardStackLogic>();
 
         for (int i = 0; i < numCardStacks; i++) {
-            CardStackLogic newPlayStack = InitializeStack(Instantiate(PlayCardStackPrefab).GetComponent<CardStack>(), numCardsPerStack, "Stack " + i);
+            CardStackLogic newPlayStack = InitializeStack(PlayCardStackViewPrefab, numCardsPerStack, "Stack " + i);
             playStacks.Add(newPlayStack);
         }
 
         return playStacks;
     }
 
-    private CardStackLogic InitializeStack(CardStack cardStack, int numCards = 0, string stackName = "Stack", int stackLimit = int.MaxValue) {
+    private CardStackLogic InitializeStack(GameObject cardStackViewPrefab, int numCards = 0, string stackName = "Stack", int stackLimit = int.MaxValue) {
+        CardStack cardStack = Instantiate(CardStackPrefab).GetComponent<CardStack>();
+        CardStackView cardStackView = Instantiate(cardStackViewPrefab, cardStack.transform).GetComponent<CardStackView>();
         List<CardLogic> cards = new List<CardLogic>();
 
         for (int i = 0; i < numCards; i++) {
@@ -82,7 +86,7 @@ public class GameInjector : MonoBehaviour {
 
         CardStackLogic newPlayStack = new CardStackLogic(cardStack.gameObject, cards, stackLimit);
         cardStack.name = stackName;
-        cardStack.InitializeValues(newPlayStack);
+        cardStack.InitializeValues(newPlayStack, cardStackView);
 
         return newPlayStack;
     }
