@@ -125,7 +125,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -200}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 200, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &398704460429964750
 CanvasRenderer:
@@ -182,8 +182,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -277,7 +277,7 @@ MonoBehaviour:
     m_Left: 0
     m_Right: 0
     m_Top: 10
-    m_Bottom: 0
+    m_Bottom: 10
   m_ChildAlignment: 4
   m_Spacing: 10
   m_ChildForceExpandWidth: 1
@@ -366,7 +366,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: MONSTER NAME
+  m_text: 'MONSTER
+
+    NAME'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -393,8 +395,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -544,11 +546,11 @@ RectTransform:
   m_Father: {fileID: 398704461551515691}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -250}
-  m_SizeDelta: {x: 220, y: 240}
-  m_Pivot: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -110}
+  m_SizeDelta: {x: 220, y: -240}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &398704461428003988
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -628,6 +630,7 @@ GameObject:
   - component: {fileID: 398704461551515691}
   - component: {fileID: 398704461551515701}
   - component: {fileID: 398704461551515690}
+  - component: {fileID: 4030593893257851596}
   m_Layer: 5
   m_Name: MonsterView
   m_TagString: Untagged
@@ -696,3 +699,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4030593893257851596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398704461551515688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd5c712978a244c84aab105e191eb887, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterSprites: {fileID: 11400000, guid: 9c9d978e6e8534f68a39b892fbac61e0, type: 2}
+  monsterName: {fileID: 398704460727675075}
+  monsterImage: {fileID: 398704461024835511}
+  monsterHealth: {fileID: 398704460429964751}
+  queueEntryInstantiator: {fileID: 398704460642795261}
+  monsterQueueEntryPrefab: {fileID: 2256167182487611612, guid: 360fe300331eb4739ae9187b7f77f80e, type: 3}
