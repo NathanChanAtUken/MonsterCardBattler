@@ -24,7 +24,7 @@ public abstract class CardStackView : MonoBehaviour {
   }
 
   public void RemoveCardFromStack(Card card) {
-    if (this.cards.Remove(card)) {
+    if (this.cards.Remove(card) == false) {
       Debug.LogError("Error: Tried removing a card from card stack that does not exist.");
     }
 
