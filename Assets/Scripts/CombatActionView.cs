@@ -4,10 +4,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MonsterQueueEntry : MonoBehaviour {
+public class CombatActionView : MonoBehaviour {
   [SerializeField] private Image actionIcon;
   [SerializeField] private TextMeshProUGUI actionText;
   [SerializeField] private Image background;
+  [SerializeField] private bool useLongDescription;
 
   [SerializeField] private Sprite attackIcon;
   [SerializeField] private Sprite defendIcon;
@@ -33,6 +34,10 @@ public class MonsterQueueEntry : MonoBehaviour {
         break;
     }
 
-    this.actionText.text = System.String.Format("{0} {1}", actionDesc, combatAction.Value);
+    if (this.useLongDescription) {
+      this.actionText.text = System.String.Format("{0} {1}", actionDesc, combatAction.Value);
+    } else {
+      this.actionText.text = combatAction.Value.ToString();
+    }
   }
 }

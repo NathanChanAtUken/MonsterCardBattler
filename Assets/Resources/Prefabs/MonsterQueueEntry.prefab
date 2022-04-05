@@ -93,6 +93,7 @@ MonoBehaviour:
   actionIcon: {fileID: 1345339059301617479}
   actionText: {fileID: 697504690000759473}
   background: {fileID: 4789849747179891595}
+  useLongDescription: 1
   attackIcon: {fileID: 21300000, guid: e56955c0692d14a5da42b045aa482e44, type: 3}
   defendIcon: {fileID: 21300000, guid: 5191f93d90f6b4289a6cd585c1d22743, type: 3}
 --- !u!1 &3193502661664809948

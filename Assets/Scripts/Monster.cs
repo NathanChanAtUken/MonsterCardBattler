@@ -17,6 +17,6 @@ public class Monster {
   }
 
   public static Monster GenerateDefaultMonster() {
-    return new Monster("vanilla", "Vanilla, Defeater Of Chocolate", 10);
+    return new Monster("vanilla", "Vanilla, Destroyer Of Chocolate", 10);
   }
 }

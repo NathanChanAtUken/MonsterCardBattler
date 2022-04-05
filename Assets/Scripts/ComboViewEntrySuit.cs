@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ComboViewEntrySuit : ComboViewEntry {
+public class ComboViewEntrySuit : MonoBehaviour {
   [SerializeField] private Image leftSuit;
   [SerializeField] private Image rightSuit;
+  [SerializeField] private CombatActionView combatActionView;
   [SerializeField] private SpriteDictionary cardSprites;
 
   public void Initialize(ComboSuit comboSuit) {
     this.leftSuit.sprite = this.GetSuitSprite(comboSuit.FirstSuit);
     this.rightSuit.sprite = this.GetSuitSprite(comboSuit.SecondSuit);
+    this.combatActionView.Initialize(comboSuit.ResultingAction);
   }
 
   private Sprite GetSuitSprite(CardLogic.CardSuit cardSuit) {

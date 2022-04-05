@@ -19,7 +19,7 @@ public class MonsterView : MonoBehaviour {
     this.RefreshHealth(currentHealth, monster.MaxHealth);
 
     foreach (CombatAction combatAction in actionQueue) {
-      MonsterQueueEntry monsterQueueEntry = Instantiate(monsterQueueEntryPrefab, this.queueEntryInstantiator).GetComponent<MonsterQueueEntry>();
+      CombatActionView monsterQueueEntry = Instantiate(monsterQueueEntryPrefab, this.queueEntryInstantiator).GetComponent<CombatActionView>();
       monsterQueueEntry.Initialize(combatAction);
     }
   }
