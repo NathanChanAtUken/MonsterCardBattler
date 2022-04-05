@@ -13,22 +13,18 @@ public class MonsterView : MonoBehaviour {
 
   [SerializeField] private GameObject monsterQueueEntryPrefab;
 
-  void Start() {
-    this.Initialize(Monster.GenerateDefaultMonster());
-  }
-
-  public void Initialize(Monster monster) {
+  public void Initialize(Monster monster, int currentHealth, List<CombatAction> actionQueue) {
     this.monsterName.text = monster.MonsterName;
     this.monsterImage.sprite = monsterSprites.Get(monster.MonsterKey);
-    this.RefreshHealth(monster);
+    this.RefreshHealth(currentHealth, monster.MaxHealth);
 
-    foreach (CombatAction combatAction in monster.ActionQueue) {
+    foreach (CombatAction combatAction in actionQueue) {
       MonsterQueueEntry monsterQueueEntry = Instantiate(monsterQueueEntryPrefab, this.queueEntryInstantiator).GetComponent<MonsterQueueEntry>();
       monsterQueueEntry.Initialize(combatAction);
     }
   }
 
-  private void RefreshHealth(Monster monster) {
-    this.monsterHealth.text = System.String.Format("{0} / {1}", monster.CurrentHealth, monster.MaxHealth);
+  private void RefreshHealth(int currentHealth, int maxHealth) {
+    this.monsterHealth.text = System.String.Format("{0} / {1}", currentHealth, maxHealth);
   }
 }

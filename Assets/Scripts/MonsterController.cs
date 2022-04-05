@@ -1,0 +1,38 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[System.Serializable]
+public class MonsterController {
+  [SerializeField]
+  private CombatEntity monsterCombatEntity;
+  public CombatEntity MonsterCombatEntity {
+    get { return this.monsterCombatEntity; }
+    set { this.monsterCombatEntity = value; }
+  }
+
+  [SerializeField] private Monster monster;
+  [SerializeField] private CombatEntity opponent;
+  [SerializeField] private List<CombatAction> actionQueue;
+  [SerializeField] private MonsterView monsterView;
+
+  public MonsterController(Monster monster, CombatEntity opponent, MonsterView monsterView) {
+    this.monsterCombatEntity = new BasicCombatEntity(monster.MaxHealth);
+    this.monster = monster;
+    this.opponent = opponent;
+    this.actionQueue = CombatAction.GenerateRandomActions(5, 5, this.monsterCombatEntity, this.opponent);
+    this.monsterView = monsterView;
+
+    this.monsterView.Initialize(this.monster, this.monsterCombatEntity.Health, this.actionQueue);
+  }
+
+  public CombatAction PopNextAction() {
+    if (this.actionQueue.Count == 0) {
+      return null;
+    }
+
+    CombatAction action = this.actionQueue[this.actionQueue.Count - 1];
+    this.actionQueue.RemoveAt(this.actionQueue.Count - 1);
+    return action;
+  }
+}

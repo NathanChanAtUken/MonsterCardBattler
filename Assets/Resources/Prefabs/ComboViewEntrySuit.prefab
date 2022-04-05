@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 1098449212712997996}
   - component: {fileID: 3260238148202360542}
   m_Layer: 5
-  m_Name: ComboEntrySuit
+  m_Name: ComboViewEntrySuit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -277,6 +277,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftSuit: {fileID: 3438010236106529491}
   rightSuit: {fileID: 7402572118849005228}
+  cardSprites: {fileID: 11400000, guid: 5ae780c9b0ca94741b8cf34ed870d318, type: 2}
 --- !u!1 &9099554564910777531
 GameObject:
   m_ObjectHideFlags: 0

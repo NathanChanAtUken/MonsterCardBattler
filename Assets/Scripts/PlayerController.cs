@@ -35,6 +35,13 @@ public class PlayerController {
             set { selectedCards = value; }
         }
 
+        [SerializeField]
+        private CombatEntity playerCombatEntity;
+        public CombatEntity PlayerCombatEntity {
+            get { return this.playerCombatEntity; }
+            set { this.playerCombatEntity = value; }
+        }
+
         public delegate void OnPlayFromStackToStack(CardLogic cardPlayed, CardStackLogic fromStack, CardStackLogic toStack);
         public event OnPlayFromStackToStack playFromStackToStackEvent;
     #endregion
