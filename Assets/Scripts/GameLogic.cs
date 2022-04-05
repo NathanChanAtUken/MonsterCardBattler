@@ -12,17 +12,15 @@ public class GameLogic {
   private MonsterController monsterController;
   [SerializeField]
   private ComboController comboController;
-
-  public delegate void OnCardPlayDelegate(CardPlayData data);
-  public static event OnCardPlayDelegate onCardPlayDelegate;
   #endregion
 
   #region Initialization Methods
-  public GameLogic(PlayerController playerController, ComboController comboController) {
+  public GameLogic(PlayerController playerController, MonsterController monsterController, ComboController comboController) {
     this.playerController = playerController;
+    this.monsterController = monsterController;
     this.comboController = comboController;
 
-    onCardPlayDelegate += this.ResolveCardPlay;
+    this.playerController.playFromStackToStackEvent += this.ResolveCardPlay;
 
     GameStart();
   }
@@ -41,15 +39,15 @@ public class GameLogic {
     }
   }
 
-  private void ResolveCardPlay(CardPlayData data) {
-    List<CombatAction> playerActions = this.comboController.GetActionsFromAllSatisfiedCombos(data);
+  private void ResolveCardPlay(CardLogic cardPlayed, CardStackLogic fromStack, CardStackLogic toStack) {
+    List<CombatAction> playerActions = this.comboController.GetActionsFromAllSatisfiedCombos(new CardPlayData(cardPlayed.CardObject.GetComponent<Card>(), toStack.CardStackObject.GetComponent<CardStack>()));
     List<CombatAction> monsterActions = new List<CombatAction> { this.monsterController.PopNextAction() };
     this.ResolveCombatPhase(playerActions, monsterActions);
   }
 
   private void ResolveCombatPhase(List<CombatAction> playerActions, List<CombatAction> monsterActions) {
-    playerController.PlayerCombatEntity.NewTurnPreProcessing(playerActions);
-    monsterController.MonsterCombatEntity.NewTurnPreProcessing(monsterActions);
+    this.playerController.PlayerCombatEntity.NewTurnPreProcessing(playerActions);
+    this.monsterController.MonsterCombatEntity.NewTurnPreProcessing(monsterActions);
 
     // Assume player has priority, this can be a setting
     this.playerController.PlayerCombatEntity.ApplyTurnActions();

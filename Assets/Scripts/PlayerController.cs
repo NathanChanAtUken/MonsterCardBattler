@@ -48,6 +48,7 @@ public class PlayerController {
 
     #region Constructors
     public PlayerController(CardStackLogic playerHand, CardStackLogic drawStack, List<CardStackLogic> playStacks) {
+        this.playerCombatEntity = new BasicCombatEntity(10);
         this.playerHand = playerHand;
         this.drawStack = drawStack;
         this.playStacks = playStacks;

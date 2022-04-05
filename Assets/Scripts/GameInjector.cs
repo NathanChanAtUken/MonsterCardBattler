@@ -58,7 +58,7 @@ public class GameInjector : MonoBehaviour {
         monsterController = InitializeMonsterController(Monster.GenerateDefaultMonster(), playerController.PlayerCombatEntity, this.monsterView);
         comboController = InitializeComboController(3, 5, playerController.PlayerCombatEntity, monsterController.MonsterCombatEntity, this.comboView);
         inputLogic = InitializeInputLogic(inputManager, playerController);
-        gameLogic = InitializeGameLogic(playerController, comboController);
+        gameLogic = InitializeGameLogic(playerController, monsterController, comboController);
 
         gameView.Initialize(playStacks, playerHand, drawStack);
     }
@@ -117,8 +117,8 @@ public class GameInjector : MonoBehaviour {
         return new InputLogic(inputManager, playerController);
     }
 
-    private GameLogic InitializeGameLogic(PlayerController playerController, ComboController comboController) {
-        return new GameLogic(playerController, comboController);
+    private GameLogic InitializeGameLogic(PlayerController playerController, MonsterController monsterController, ComboController comboController) {
+        return new GameLogic(playerController, monsterController, comboController);
     }
     #endregion
 }
