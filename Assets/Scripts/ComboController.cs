@@ -56,6 +56,7 @@ public class ComboController {
     demoCombos.Add(new ComboDifference(new CombatAction(CombatAction.CombatActionType.Defend, 3, self), 4));
     demoCombos.Add(new ComboSuit(new CombatAction(CombatAction.CombatActionType.Attack, 4, opponent), CardLogic.CardSuit.Heart, CardLogic.CardSuit.Spade));
     demoCombos.Add(new ComboSuit(new CombatAction(CombatAction.CombatActionType.Defend, 2, self), CardLogic.CardSuit.Diamond, CardLogic.CardSuit.Diamond));
+    demoCombos.Add(new ComboDifference(new CombatAction(CombatAction.CombatActionType.Attack, 2, opponent), 2));
     return demoCombos;
   }
 }

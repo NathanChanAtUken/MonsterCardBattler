@@ -20,7 +20,7 @@ public class MonsterController {
     this.monsterCombatEntity = new BasicCombatEntity(monster.MaxHealth);
     this.monster = monster;
     this.opponent = opponent;
-    this.actionQueue = CombatAction.GenerateRandomActions(5, 5, this.monsterCombatEntity, this.opponent);
+    this.actionQueue = CombatAction.GenerateRandomActions(5, 3, this.monsterCombatEntity, this.opponent);
     this.monsterView = monsterView;
 
     this.RefreshMonsterView();
@@ -37,7 +37,7 @@ public class MonsterController {
   }
 
   public void GenerateNewAction() {
-    this.actionQueue.Insert(0, CombatAction.GenerateRandomAction(5, this.monsterCombatEntity, this.opponent));
+    this.actionQueue.Insert(0, CombatAction.GenerateRandomAction(3, this.monsterCombatEntity, this.opponent));
   }
 
   public void RefreshMonsterView() {
