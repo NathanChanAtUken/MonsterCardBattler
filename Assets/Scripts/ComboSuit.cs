@@ -24,8 +24,8 @@ public class ComboSuit : Combo {
   }
 
   public override bool IsComboSatisfied(GameLogic.CardPlayData cardPlayData) {
-    CardLogic.CardSuit topCardSuit = cardPlayData.playedCardStack.CardStackLogic.TopCard().Suit;
-    CardLogic.CardSuit playedCardSuit = cardPlayData.playedCard.CardLogic.Suit;
-    return (topCardSuit == firstSuit && playedCardSuit == secondSuit) || (topCardSuit == secondSuit && playedCardSuit == firstSuit);
+    CardLogic.CardSuit firstCardSuit = cardPlayData.playedCard.CardLogic.Suit;
+    CardLogic.CardSuit secondCardSuit = cardPlayData.cardPlayedOn.CardLogic.Suit;
+    return (firstCardSuit == firstSuit && secondCardSuit == secondSuit) || (firstCardSuit == secondSuit && secondCardSuit == firstSuit);
   }
 }

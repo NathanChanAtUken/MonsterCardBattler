@@ -42,6 +42,10 @@ public class CardStackLogic {
     #endregion
 
     #region Data Methods
+    public int StackLength() {
+        return this.cardStack.Count;
+    }
+
     public void PlayCardAt(CardLogic playedCard, int index) {
         cardStack.Insert(index, playedCard);
         playedCard.CardObject.transform.SetParent(cardStackObject.transform);

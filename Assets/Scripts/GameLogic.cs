@@ -58,13 +58,14 @@ public class GameLogic {
 
     // Assume player has priority, this can be a setting
     this.playerController.PlayerCombatEntity.ApplyTurnActions();
-    if (this.playerController.PlayerCombatEntity.IsDead) {
-      lose = true;
-    }
-
     this.monsterController.MonsterCombatEntity.ApplyTurnActions();
+
     if (this.monsterController.MonsterCombatEntity.IsDead) {
       win = true;
+    }
+
+    if (this.playerController.PlayerCombatEntity.IsDead) {
+      lose = true;
     }
 
     this.monsterController.RefreshMonsterView();
@@ -80,11 +81,11 @@ public class GameLogic {
 
   public struct CardPlayData {
     public Card playedCard;
-    public CardStack playedCardStack;
+    public Card cardPlayedOn;
 
     public CardPlayData(Card playedCard, CardStack playedCardStack) {
       this.playedCard = playedCard;
-      this.playedCardStack = playedCardStack;
+      this.cardPlayedOn = playedCardStack.CardStackLogic.CardAt(playedCardStack.CardStackLogic.StackLength() - 2).CardObject.GetComponent<Card>();
     }
   }
 }

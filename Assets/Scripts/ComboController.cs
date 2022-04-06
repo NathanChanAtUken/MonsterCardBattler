@@ -30,7 +30,7 @@ public class ComboController {
     CombatAction action = CombatAction.GenerateRandomAction(actionMaxValue, self, opponent, random);
     switch (random.Next(0, 2)) {
       case 0:
-        return new ComboDifference(action, random.Next(0, 8));
+        return new ComboDifference(action, random.Next(0, 7));
       case 1:
         System.Array values = System.Enum.GetValues(typeof(CardLogic.CardSuit));
         CardLogic.CardSuit firstSuit = (CardLogic.CardSuit)values.GetValue(random.Next(values.Length));
@@ -49,5 +49,13 @@ public class ComboController {
     }
 
     return combos;
+  }
+
+  public static List<Combo> GetDemoCombos(CombatEntity self, CombatEntity opponent) {
+    List<Combo> demoCombos = new List<Combo>();
+    demoCombos.Add(new ComboDifference(new CombatAction(CombatAction.CombatActionType.Defend, 3, self), 4));
+    demoCombos.Add(new ComboSuit(new CombatAction(CombatAction.CombatActionType.Attack, 4, opponent), CardLogic.CardSuit.Heart, CardLogic.CardSuit.Spade));
+    demoCombos.Add(new ComboSuit(new CombatAction(CombatAction.CombatActionType.Defend, 2, self), CardLogic.CardSuit.Diamond, CardLogic.CardSuit.Diamond));
+    return demoCombos;
   }
 }

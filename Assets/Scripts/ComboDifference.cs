@@ -16,7 +16,14 @@ public class ComboDifference : Combo {
   }
 
   public override bool IsComboSatisfied(GameLogic.CardPlayData cardPlayData) {
-    // TO BE IMPLEMENTED
-    return false;
+    int firstCardRank = cardPlayData.playedCard.CardLogic.Rank;
+    int secondCardRank = cardPlayData.cardPlayedOn.CardLogic.Rank;
+
+    int largerRank = Mathf.Max(firstCardRank, secondCardRank);
+    int smallerRank = Mathf.Min(firstCardRank, secondCardRank);
+
+    int diff = Mathf.Min(largerRank - smallerRank, 13 - (largerRank - smallerRank));
+
+    return this.difference == diff;
   }
 }

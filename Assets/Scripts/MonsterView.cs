@@ -11,7 +11,6 @@ public class MonsterView : MonoBehaviour {
   [SerializeField] private TextMeshProUGUI monsterHealth;
   [SerializeField] private Transform queueEntryInstantiator;
   [SerializeField] private GameObject monsterQueueEntryPrefab;
-  [SerializeField] private float queueSpacing = 25f;
 
   public void Initialize(Monster monster, int currentHealth, List<CombatAction> actionQueue) {
     this.monsterName.text = monster.MonsterName;

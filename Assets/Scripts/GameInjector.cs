@@ -114,7 +114,8 @@ public class GameInjector : MonoBehaviour {
     }
 
     private ComboController InitializeComboController(int comboCount, int maxActionValue, CombatEntity self, CombatEntity opponent, ComboView comboView) {
-        return new ComboController(ComboController.GenerateRandomCombos(comboCount, maxActionValue, self, opponent), comboView);
+        // return new ComboController(ComboController.GenerateRandomCombos(comboCount, maxActionValue, self, opponent), comboView);
+        return new ComboController(ComboController.GetDemoCombos(self, opponent), comboView);
     }
 
     private InputLogic InitializeInputLogic(InputManager inputManager, PlayerController playerController) {
