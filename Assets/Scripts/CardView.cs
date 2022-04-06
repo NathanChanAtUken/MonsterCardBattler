@@ -5,6 +5,7 @@ using UnityEngine.Rendering;
 
 public class CardView : MonoBehaviour {
   [SerializeField] private SpriteDictionary cardSprites;
+  [SerializeField] private GameObject highlight;
   [SerializeField] private GameObject cardBack;
   [SerializeField] private GameObject cardFront;
   [SerializeField] private SpriteRenderer suitRenderer;
@@ -19,10 +20,6 @@ public class CardView : MonoBehaviour {
 
   public bool IsFaceUp {
     get { return this.cardFront.gameObject.activeSelf; }
-  }
-
-  private void Start() {
-
   }
 
   public void Initialize(CardLogic cardLogic, bool isFaceUp = true, int sortingOrder = 0) {
@@ -42,6 +39,16 @@ public class CardView : MonoBehaviour {
     } else {
       this.ShowBack();
     }
+
+    this.highlight.SetActive(false);
+  }
+
+  public void ShowHighlight() {
+    this.highlight.SetActive(true);
+  }
+
+  public void HideHighlight() {
+    this.highlight.SetActive(false);
   }
 
   public void ShowFront() {

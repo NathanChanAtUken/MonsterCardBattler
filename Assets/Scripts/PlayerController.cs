@@ -44,14 +44,24 @@ public class PlayerController {
 
         public delegate void OnPlayFromStackToStack(CardLogic cardPlayed, CardStackLogic fromStack, CardStackLogic toStack);
         public event OnPlayFromStackToStack playFromStackToStackEvent;
+
+        public delegate void OnPlayFromHandToStack(CardLogic cardPlayed, CardStackLogic toStack);
+        public event OnPlayFromHandToStack playFromHandToStackEvent;
+
+        [SerializeField] private Player player;
+        [SerializeField] private PlayerView playerView;
     #endregion
 
     #region Constructors
-    public PlayerController(CardStackLogic playerHand, CardStackLogic drawStack, List<CardStackLogic> playStacks) {
+    public PlayerController(CardStackLogic playerHand, CardStackLogic drawStack, List<CardStackLogic> playStacks, Player player, PlayerView playerView) {
         this.playerCombatEntity = new BasicCombatEntity(10);
         this.playerHand = playerHand;
         this.drawStack = drawStack;
         this.playStacks = playStacks;
+        this.player = player;
+        this.playerView = playerView;
+
+        this.RefreshPlayerView();
     }
     #endregion
 
@@ -68,6 +78,7 @@ public class PlayerController {
         }
 
         selectedCards.Add(selectedCard);
+        selectedCard.CardObject.GetComponent<Card>().CardView.ShowHighlight();
     }
 
     public void DeselectCard(CardLogic deselectedCard) {
@@ -76,20 +87,30 @@ public class PlayerController {
         }
 
         selectedCards.Remove(deselectedCard);
+        deselectedCard.CardObject.GetComponent<Card>().CardView.HideHighlight();
     }
 
     public void PlayFromStackToStack(CardLogic cardPlayed, CardStackLogic fromStack, CardStackLogic toStack) {
         fromStack.Remove(cardPlayed);
         toStack.PlayToStack(cardPlayed);
+
         playFromStackToStackEvent?.Invoke(cardPlayed, fromStack, toStack);
     }
 
     public void PlayFromHandToStack(CardLogic cardPlayed, CardStackLogic playStack) {
         PlayFromStackToStack(cardPlayed, playerHand, playStack);
-    }
+        DrawCard();
+        DeselectCard(cardPlayed);
+
+        playFromHandToStackEvent?.Invoke(cardPlayed, playStack);
+  }
 
     public void DrawCard() {
         PlayFromStackToStack(drawStack.TopCard(), drawStack, playerHand);
     }
     #endregion
+
+    public void RefreshPlayerView() {
+        this.playerView.Initialize(this.player, this.playerCombatEntity.Health);
+    }
 }

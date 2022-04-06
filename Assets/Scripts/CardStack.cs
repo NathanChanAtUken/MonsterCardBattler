@@ -13,6 +13,9 @@ public class CardStack : MonoBehaviour {
         }
 
         [SerializeField]
+        private CardStackPhysics cardStackPhysics;
+
+        [SerializeField]
         private CardStackView cardStackView;
     #endregion
     
@@ -20,15 +23,15 @@ public class CardStack : MonoBehaviour {
     public void InitializeValues(CardStackLogic cardStackLogic, CardStackView cardStackView) {
         this.cardStackLogic = cardStackLogic;
         this.cardStackView = cardStackView;
-        this.cardStackView.Initialize(cardStackLogic);
+        this.cardStackView.Initialize(cardStackLogic, false);
     }
     #endregion
 
-    public void AddCardToStack(Card card) {
-        this.cardStackView.AddCardToStack(card);
+    public void RefreshView() {
+        this.cardStackView.Initialize(this.cardStackLogic, true);
     }
 
-    public void RemoveCardFromStack(Card card) {
-        this.cardStackView.RemoveCardFromStack(card);
+    public void DisablePhysics() {
+       this.cardStackPhysics.gameObject.SetActive(false);
     }
 }

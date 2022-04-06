@@ -56,9 +56,13 @@ public class CardLogic {
         this.rank = rank;
 
         if (instantiateRandomized) {
-            this.color = (CardColor)UnityEngine.Random.Range(0, Enum.GetNames(typeof(CardColor)).Length);
-            this.suit = (CardSuit)UnityEngine.Random.Range(0, Enum.GetNames(typeof(CardSuit)).Length);
             this.rank = UnityEngine.Random.Range(1, 14); // Inclusive 1 = A, Exclusive 14 (13 = K)
+            this.suit = (CardSuit)UnityEngine.Random.Range(0, Enum.GetNames(typeof(CardSuit)).Length);
+            if (this.suit == CardSuit.Club || this.suit == CardSuit.Spade) {
+                this.color = CardColor.Black;
+            } else {
+                this.color = CardColor.Red;
+            }
         }
     }
     #endregion

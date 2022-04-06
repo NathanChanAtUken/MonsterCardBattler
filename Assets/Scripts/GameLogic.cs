@@ -12,15 +12,18 @@ public class GameLogic {
   private MonsterController monsterController;
   [SerializeField]
   private ComboController comboController;
+  [SerializeField]
+  private EndGameScreen endGameScreen;
   #endregion
 
   #region Initialization Methods
-  public GameLogic(PlayerController playerController, MonsterController monsterController, ComboController comboController) {
+  public GameLogic(PlayerController playerController, MonsterController monsterController, ComboController comboController, EndGameScreen endGameScreen) {
     this.playerController = playerController;
     this.monsterController = monsterController;
     this.comboController = comboController;
+    this.endGameScreen = endGameScreen;
 
-    this.playerController.playFromStackToStackEvent += this.ResolveCardPlay;
+    this.playerController.playFromHandToStackEvent += this.ResolveCardPlay;
 
     GameStart();
   }
@@ -39,27 +42,38 @@ public class GameLogic {
     }
   }
 
-  private void ResolveCardPlay(CardLogic cardPlayed, CardStackLogic fromStack, CardStackLogic toStack) {
+  private void ResolveCardPlay(CardLogic cardPlayed, CardStackLogic toStack) {
     List<CombatAction> playerActions = this.comboController.GetActionsFromAllSatisfiedCombos(new CardPlayData(cardPlayed.CardObject.GetComponent<Card>(), toStack.CardStackObject.GetComponent<CardStack>()));
     List<CombatAction> monsterActions = new List<CombatAction> { this.monsterController.PopNextAction() };
+    this.monsterController.GenerateNewAction();
     this.ResolveCombatPhase(playerActions, monsterActions);
   }
 
   private void ResolveCombatPhase(List<CombatAction> playerActions, List<CombatAction> monsterActions) {
+    bool win = false;
+    bool lose = false;
+
     this.playerController.PlayerCombatEntity.NewTurnPreProcessing(playerActions);
     this.monsterController.MonsterCombatEntity.NewTurnPreProcessing(monsterActions);
 
     // Assume player has priority, this can be a setting
     this.playerController.PlayerCombatEntity.ApplyTurnActions();
     if (this.playerController.PlayerCombatEntity.IsDead) {
-      Debug.Log("You Lose! (Handle lose condition here)");
-      return;
+      lose = true;
     }
 
     this.monsterController.MonsterCombatEntity.ApplyTurnActions();
     if (this.monsterController.MonsterCombatEntity.IsDead) {
-      Debug.Log("You Win! (Handle win condition here)");
-      return;
+      win = true;
+    }
+
+    this.monsterController.RefreshMonsterView();
+    this.playerController.RefreshPlayerView();
+
+    if (win) {
+      this.endGameScreen.ShowScreen(true);
+    } else if (lose) {
+      this.endGameScreen.ShowScreen(false);
     }
   }
   #endregion

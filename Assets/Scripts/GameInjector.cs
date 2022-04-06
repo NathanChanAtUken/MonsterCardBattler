@@ -10,9 +10,13 @@ public class GameInjector : MonoBehaviour {
         [SerializeField]
         private GameView gameView;
         [SerializeField]
+        private PlayerView playerView;
+        [SerializeField]
         private MonsterView monsterView;
         [SerializeField]
         private ComboView comboView;
+        [SerializeField]
+        private EndGameScreen endGameScreen;
 
         [Header("Inspector Injected Parameters")]
         [SerializeField]
@@ -54,13 +58,13 @@ public class GameInjector : MonoBehaviour {
         CardStackLogic playerHand = InitializePlayerHand(initialHandSize);
         CardStackLogic drawStack = InitializeDrawStack(initialDrawStackSize);
         List<CardStackLogic> playStacks = InitializePlayStacks();
-        playerController = InitializePlayerController(playerHand, drawStack, playStacks);
+        playerController = InitializePlayerController(playerHand, drawStack, playStacks, Player.GenerateDefaultPlayer(), this.playerView);
         monsterController = InitializeMonsterController(Monster.GenerateDefaultMonster(), playerController.PlayerCombatEntity, this.monsterView);
         comboController = InitializeComboController(3, 5, playerController.PlayerCombatEntity, monsterController.MonsterCombatEntity, this.comboView);
         inputLogic = InitializeInputLogic(inputManager, playerController);
-        gameLogic = InitializeGameLogic(playerController, monsterController, comboController);
+        gameLogic = InitializeGameLogic(playerController, monsterController, comboController, endGameScreen);
 
-        gameView.Initialize(playStacks, playerHand, drawStack);
+        gameView.Initialize(playStacks, playerHand, drawStack, playerController);
     }
 
     private CardStackLogic InitializePlayerHand(int initialHandSize) {
@@ -101,8 +105,8 @@ public class GameInjector : MonoBehaviour {
         return newPlayStack;
     }
 
-    private PlayerController InitializePlayerController(CardStackLogic playerHand, CardStackLogic drawStack, List<CardStackLogic> playStacks) {
-        return new PlayerController(playerHand, drawStack, playStacks);
+    private PlayerController InitializePlayerController(CardStackLogic playerHand, CardStackLogic drawStack, List<CardStackLogic> playStacks, Player player, PlayerView playerView) {
+        return new PlayerController(playerHand, drawStack, playStacks, player, playerView);
     }
 
     private MonsterController InitializeMonsterController(Monster monster, CombatEntity opponent, MonsterView monsterView) {
@@ -117,8 +121,8 @@ public class GameInjector : MonoBehaviour {
         return new InputLogic(inputManager, playerController);
     }
 
-    private GameLogic InitializeGameLogic(PlayerController playerController, MonsterController monsterController, ComboController comboController) {
-        return new GameLogic(playerController, monsterController, comboController);
+    private GameLogic InitializeGameLogic(PlayerController playerController, MonsterController monsterController, ComboController comboController, EndGameScreen endGameScreen) {
+        return new GameLogic(playerController, monsterController, comboController, endGameScreen);
     }
     #endregion
 }

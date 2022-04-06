@@ -8,14 +8,14 @@ public abstract class CardStackView : MonoBehaviour {
 
   protected List<Card> cards;
 
-  public void Initialize(CardStackLogic cardStackLogic) {
+  public virtual void Initialize(CardStackLogic cardStackLogic, bool animate) {
     int cardCount = cardStackLogic.StackLimit - cardStackLogic.EmptySlots();
     cards = new List<Card>();
     for (int cardIndex = 0; cardIndex < cardCount; cardIndex++) {
       cards.Add(cardStackLogic.CardAt(cardIndex).CardObject.GetComponent<Card>());
     }
 
-    this.RefreshAllCards(false);
+    this.RefreshAllCards(animate);
   }
 
   public void AddCardToStack(Card card) {

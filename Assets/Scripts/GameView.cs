@@ -16,10 +16,17 @@ public class GameView : MonoBehaviour {
   private CardStack playerHand;
   private CardStack drawStack;
 
-  public void Initialize(List<CardStackLogic> cardStackLogics, CardStackLogic playerHandLogic, CardStackLogic drawStackLogic) {
+  public void Initialize(List<CardStackLogic> cardStackLogics, CardStackLogic playerHandLogic, CardStackLogic drawStackLogic, PlayerController playerController) {
     this.RefreshPlayStacks(cardStackLogics.Select(logic => logic.CardStackObject.GetComponent<CardStack>()).ToList());
     this.RefreshPlayerHand(playerHandLogic.CardStackObject.GetComponent<CardStack>());
     this.RefreshDrawStack(drawStackLogic.CardStackObject.GetComponent<CardStack>());
+    playerController.playFromHandToStackEvent += RefreshAfterCardPlay;
+  }
+
+  public void RefreshAfterCardPlay(CardLogic cardPlayed, CardStackLogic toStack) {
+    toStack.CardStackObject.GetComponent<CardStack>().RefreshView();
+    playerHand.RefreshView();
+    drawStack.RefreshView();
   }
 
   public void RefreshPlayStacks(List<CardStack> cardStacks) {

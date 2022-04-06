@@ -17,6 +17,6 @@ public class ComboDifference : Combo {
 
   public override bool IsComboSatisfied(GameLogic.CardPlayData cardPlayData) {
     // TO BE IMPLEMENTED
-    return true;
+    return false;
   }
 }

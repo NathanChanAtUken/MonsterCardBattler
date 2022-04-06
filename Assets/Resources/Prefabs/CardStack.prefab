@@ -165,4 +165,5 @@ MonoBehaviour:
     cardStackObject: {fileID: 0}
     stackLimit: 0
     cardStack: []
+  cardStackPhysics: {fileID: 4419388295662996433}
   cardStackView: {fileID: 0}

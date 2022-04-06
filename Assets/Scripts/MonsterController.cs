@@ -23,7 +23,7 @@ public class MonsterController {
     this.actionQueue = CombatAction.GenerateRandomActions(5, 5, this.monsterCombatEntity, this.opponent);
     this.monsterView = monsterView;
 
-    this.monsterView.Initialize(this.monster, this.monsterCombatEntity.Health, this.actionQueue);
+    this.RefreshMonsterView();
   }
 
   public CombatAction PopNextAction() {
@@ -34,5 +34,13 @@ public class MonsterController {
     CombatAction action = this.actionQueue[this.actionQueue.Count - 1];
     this.actionQueue.RemoveAt(this.actionQueue.Count - 1);
     return action;
+  }
+
+  public void GenerateNewAction() {
+    this.actionQueue.Insert(0, CombatAction.GenerateRandomAction(5, this.monsterCombatEntity, this.opponent));
+  }
+
+  public void RefreshMonsterView() {
+    this.monsterView.Initialize(this.monster, this.monsterCombatEntity.Health, this.actionQueue);
   }
 }

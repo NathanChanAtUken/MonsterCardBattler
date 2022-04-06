@@ -15,3 +15,5 @@ MonoBehaviour:
   spriteElements:
   - spriteKey: vanilla
     sprite: {fileID: 21300000, guid: c3e29ec0f2a514602902a6a666c90308, type: 3}
+  - spriteKey: rogan
+    sprite: {fileID: 21300000, guid: 690165a7f0d04410da19429ce09ae13d, type: 3}
